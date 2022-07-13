@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'; // Aquí se importa React
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import './index.css'; // Estilos CSS
+import App from './App'; // Componente
+import reportWebVitals from './reportWebVitals'; // Para ver reportes de errores
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
