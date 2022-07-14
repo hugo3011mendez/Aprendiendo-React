@@ -1,6 +1,10 @@
 # Aprendiendo React
-- [Página desde la que haré el curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-01-react/#planificacion)
-- [Primer vídeo de la lista que sigo para el curso de React](https://www.youtube.com/watch?v=WMHOE6RcHlY)
+- [Clase 1 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-01-react/)
+- [Clase 2 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-02-react-formularios/) *Actualmente en esta*
+- [Clase 3 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-03-react-todo/)
+- [Clase 4 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-04-react-api/)
+- [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/)
+- [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/)
 
 
 ## Requisitos
@@ -71,4 +75,3 @@
         - Un estado o hook que modifica el estado de un componente para que cuando un valor cambie gracias a acciones del usuario se renderice
         - *useState()* declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
         - *useState()* devolverá una pareja de valores : el estado actual y la función que lo actualiza
-        - 
