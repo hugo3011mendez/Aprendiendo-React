@@ -16,8 +16,8 @@ const App = () => {
     const SaludoBienvenida = () => <h2 className={clasesObjeto.success}>Online</h2>;
     const SaludoDespedida = () => <h2 className={clasesObjeto.danger}>Offline</h2>;
 
-    // Arrays y Keys :
-    const frutas = ["🍉", "🍌", "🍓"];
+    // Eventos :
+    const funcionClick = (nombre) => {console.log(nombre + " ha hecho click!");};
     
     return (
         // Llamo a variables escribiéndolas entre llaves
@@ -29,14 +29,8 @@ const App = () => {
             {/* Si la variable es true se mostrará Online y en verde, si es false se mostrará Offline y rojo */}
             {user ? <SaludoBienvenida/> : <SaludoDespedida/>} {/* Así puedo llamar a funciones */}
 
-            <ul> {/* Listo el array creado en una ul */}
-                {/* React usa el key prop para crear una relación entre el componente y el elemento DOM */}
-                {/* La biblioteca utiliza esta relación para determinar si el componente debe volver a renderizarse o no */}
-                {/* No se recomienda utilizar el índice de la matriz como key si sabe que la matriz no será estática */}
-                {frutas.map((fruta, index)=>(
-                    <li key={fruta}> {index + 1} - {fruta} </li>
-                ))}
-            </ul>
+            {/* Muestro un botón al que le asocio el evento onClick */}
+            <button className="btn btn-primary" onClick={() => funcionClick("Hugo")}>Click Me</button>
         </div>
     );
 };
