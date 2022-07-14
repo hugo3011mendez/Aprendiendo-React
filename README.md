@@ -34,3 +34,8 @@
     - En index.js se concentrarán todos los componentes React de la página
     - App.js es un componente de React en este caso
 
+- JSX (JavaScript XML)
+    - Permite ejecutar código de JavaScript dentro y trabaja con etiquetas XML
+    - Para llamar o referirse a variables y hacer comentarios hay que hacerlo entre llaves {}
+    - Para llamar a funciones hay que hacerlo como si fueran etiquetas : <Componente/>
+    

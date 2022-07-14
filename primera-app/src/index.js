@@ -1,17 +1,14 @@
 import React from 'react'; // Aquí se importa React
-import ReactDOM from 'react-dom/client';
-import './index.css'; // Estilos CSS
-import App from './App'; // Componente
-import reportWebVitals from './reportWebVitals'; // Para ver reportes de errores
+import ReactDOM from 'react-dom/client'; // Se usa cuando se inicie el index
+
+import App from './App' // Importo el componente principal
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+// Está indicando que se tome el componente definido dentro de la siguiente etiqueta, y que lo lleve a donde está root, <div id="root"> en index.html
 root.render(
+  // El StrictMode es es una herramienta para destacar problemas potenciales en la aplicación
+  // Deberíamos tener componentes que se metan aquí para mostrarlos todos
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <App/> {/* Muestro el componente principal */}
+  </React.StrictMode> // Info que se va a mostrar en el <div id="root">
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
