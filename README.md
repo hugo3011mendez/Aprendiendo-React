@@ -55,3 +55,20 @@
     - Componentes :
         - App.jsx debe estar en el mismo nivel de estructura de carpetas que index.js
         - Se recomienda crear una carpeta dentro de src para los diferentes componentes
+    
+    - Fragments :
+        - return() sólo permite devolver un elemento, si queremos devolver más tendremos que usar Fragments
+        - Podemos escribir `<React.Fragment>` y `</React.Fragment>`, o simplemente escribir `<>` y `</>` que funcionará igual
+    
+    - Props :
+        - Cuando React ve un elemento representando un componente definido por el usuario, pasa atributos JSX e hijos a este componente como un solo objeto
+        - Son de sólo lectura, no se pueden modificar en el componente en el que los vamos a usar
+
+    - Estados / Hooks :
+        - Permiten a los componentes de React cambiar su salida a lo largo del tiempo en respuesta a acciones del usuario, respuestas de red y cualquier otra cosa
+        - **Se deben usar cada vez que se quiera hacer algo dinámico**
+        - No funcionan dentro de las clases, te permiten usar React sin clases
+        - Un estado o hook que modifica el estado de un componente para que cuando un valor cambie gracias a acciones del usuario se renderice
+        - *useState()* declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
+        - *useState()* devolverá una pareja de valores : el estado actual y la función que lo actualiza
+        - 
