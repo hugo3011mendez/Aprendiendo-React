@@ -12,11 +12,17 @@
 - [Instalar Node.js](https://nodejs.org/es/) para usar NPM
 
 
+## Recursos
+- [React Developer Tools for Google Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+
+
 ## Create React App
 - Comandos para crear un proyecto en React
     - `npx create-react-app nombre-de-app`
     - `cd nombre-de-app`
     - `npm start`
+
+- Para descargar/instalar los módulos que usará el proyecto (node_modules) escribiremos en la terminal : `npm i`
 
 
 ## Info Importante
@@ -29,8 +35,6 @@
 - Carpeta node.modules
     - En esta carpeta se encuentran los módulos que usa el proyecto
 
-- Para descargar/instalar los módulos que usará el proyecto (node_modules) escribiremos en la terminal : `npm i`
-
 - Carpeta public
     - Contiene archivos estáticos que tiene la aplicación por defecto
     - En index.html se ejecutará el código de index.js
@@ -39,10 +43,14 @@
     - En index.js se concentrarán todos los componentes React de la página
     - App.js es un componente de React en este caso
 
-- JSX (JavaScript XML)
+
+## JSX (JavaScript XML)
     - Permite ejecutar código de JavaScript dentro y trabaja con etiquetas XML
-    - Gracias a la extensión, escribiendo `rafce` se escribirá toda la estructura necesaria para empezar con el componente de React, eliminando el import
+
+    - Gracias a la extensión, escribiendo `rafce` se escribirá toda la estructura necesaria del componente de React, eliminando el import
+
     - Para llamar o referirse a variables y hacer comentarios hay que hacerlo entre llaves {}
+
     - Para llamar a funciones hay que hacerlo como si fueran etiquetas : <Componente/>
 
     - Funciones :
@@ -75,3 +83,12 @@
         - Un estado o hook que modifica el estado de un componente para que cuando un valor cambie gracias a acciones del usuario se renderice
         - *useState()* declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
         - *useState()* devolverá una pareja de valores : el estado actual y la función que lo actualiza
+    
+    - Formularios no controlados (Uncontrolled Forms) :
+        - Los datos del formulario son manejados por el propio DOM
+        - Para escribir un componente no controlado, se puede usar una referencia para obtener los valores del formulario desde el DOM
+        - Las referencias proporcionan una forma de acceder a los nodos del DOM o a elementos React creados en el método de renderizado
+        - 
+
+
+        - Trabajaré con [React Hook Form](https://react-hook-form.com/) y [Formik](https://formik.org/)
