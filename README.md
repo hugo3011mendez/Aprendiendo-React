@@ -45,50 +45,54 @@
 
 
 ## JSX (JavaScript XML)
-    - Permite ejecutar código de JavaScript dentro y trabaja con etiquetas XML
+- Permite ejecutar código de JavaScript dentro y trabaja con etiquetas XML
 
-    - Gracias a la extensión, escribiendo `rafce` se escribirá toda la estructura necesaria del componente de React, eliminando el import
+- Gracias a la extensión, escribiendo `rafce` se escribirá toda la estructura necesaria del componente de React, eliminando el import
 
-    - Para llamar o referirse a variables y hacer comentarios hay que hacerlo entre llaves {}
+- Para llamar o referirse a variables y hacer comentarios hay que hacerlo entre llaves {}
 
-    - Para llamar a funciones hay que hacerlo como si fueran etiquetas : <Componente/>
+- Para llamar a funciones hay que hacerlo como si fueran etiquetas : <Componente/>
 
-    - Funciones :
-        - La nomenclatura de las funciones empieza por mayúscula
+- Funciones :
+    - La nomenclatura de las funciones empieza por mayúscula
 
-    - Arrays y Keys :
-        - Para arrays, React usa el key prop para crear una relación entre el componente y el elemento DOM
-        - No se recomienda utilizar el índice de una matriz como key si sabe que la matriz no será estática
+- Arrays y Keys :
+    - Para arrays, React usa el key prop para crear una relación entre el componente y el elemento DOM
+    - No se recomienda utilizar el índice de una matriz como key si sabe que la matriz no será estática
 
-    - Eventos :
-        - Los eventos se se nombran usando camelCase, en vez de minúsculas
-        - Con JSX se pasa una función dentro de una lambda como el manejador del evento, en vez de un string
+- Eventos :
+    - Los eventos se se nombran usando camelCase, en vez de minúsculas
+    - Con JSX se pasa una función dentro de una lambda como el manejador del evento, en vez de un string
     
-    - Componentes :
-        - App.jsx debe estar en el mismo nivel de estructura de carpetas que index.js
-        - Se recomienda crear una carpeta dentro de src para los diferentes componentes
+- Componentes :
+    - App.jsx debe estar en el mismo nivel de estructura de carpetas que index.js
+    - Se recomienda crear una carpeta dentro de src para los diferentes componentes
     
-    - Fragments :
-        - return() sólo permite devolver un elemento, si queremos devolver más tendremos que usar Fragments
-        - Podemos escribir `<React.Fragment>` y `</React.Fragment>`, o simplemente escribir `<>` y `</>` que funcionará igual
+- Fragments :
+    - return() sólo permite devolver un elemento, si queremos devolver más tendremos que usar Fragments
+    - Podemos escribir `<React.Fragment>` y `</React.Fragment>`, o simplemente escribir `<>` y `</>` que funcionará igual
     
-    - Props :
-        - Cuando React ve un elemento representando un componente definido por el usuario, pasa atributos JSX e hijos a este componente como un solo objeto
-        - Son de sólo lectura, no se pueden modificar en el componente en el que los vamos a usar
+- Props :
+    - Cuando React ve un elemento representando un componente definido por el usuario, pasa atributos JSX e hijos a este componente como un solo objeto
+    - Son de sólo lectura, no se pueden modificar en el componente en el que los vamos a usar
 
-    - Estados / Hooks :
-        - Permiten a los componentes de React cambiar su salida a lo largo del tiempo en respuesta a acciones del usuario, respuestas de red y cualquier otra cosa
-        - **Se deben usar cada vez que se quiera hacer algo dinámico**
-        - No funcionan dentro de las clases, te permiten usar React sin clases
-        - Un estado o hook que modifica el estado de un componente para que cuando un valor cambie gracias a acciones del usuario se renderice
-        - *useState()* declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
-        - *useState()* devolverá una pareja de valores : el estado actual y la función que lo actualiza
+- Estados / Hooks :
+    - Permiten a los componentes de React cambiar su salida a lo largo del tiempo en respuesta a acciones del usuario, respuestas de red y cualquier otra cosa
+    - **Se deben usar cada vez que se quiera hacer algo dinámico**
+    - No funcionan dentro de las clases, te permiten usar React sin clases
+    - Un estado o hook que modifica el estado de un componente para que cuando un valor cambie gracias a acciones del usuario se renderice
+    - `useState()` declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
+    - `useState()` devolverá una pareja de valores : el estado actual y la función que lo actualiza
+    - El hook `useRef()` se usa para las referencias y tendrá un argumento null
     
-    - Formularios no controlados (Uncontrolled Forms) :
-        - Los datos del formulario son manejados por el propio DOM
-        - Para escribir un componente no controlado, se puede usar una referencia para obtener los valores del formulario desde el DOM
-        - Las referencias proporcionan una forma de acceder a los nodos del DOM o a elementos React creados en el método de renderizado
-        - 
+- Formularios
+    - Trabajaré con [React Hook Form](https://react-hook-form.com/) y [Formik](https://formik.org/)
+    - En React, un <textarea> utiliza un atributo value para definir su texto
 
-
-        - Trabajaré con [React Hook Form](https://react-hook-form.com/) y [Formik](https://formik.org/)
+- Formularios no controlados (Uncontrolled Forms) :
+    - Los datos del formulario son manejados por el propio DOM
+    - Para escribir un componente no controlado, se puede usar una referencia para obtener los valores del formulario desde el DOM
+    - Las referencias proporcionan una forma de acceder a los nodos del DOM o a elementos React creados en el método de renderizado
+    - Para usar los elementos se recomienda usar referencias en vez de un *GetElementById()* o un *QuerySelector()*
+    - Se usa el hook `useRef()` para recoger los datos del form 
+    - Se le asocia un evento onSubmit al formulario para especificar las acciones a realizar
