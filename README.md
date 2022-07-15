@@ -96,3 +96,6 @@
     - Para usar los elementos se recomienda usar referencias en vez de un *GetElementById()* o un *QuerySelector()*
     - Se usa el hook `useRef()` para recoger los datos del form 
     - Se le asocia un evento onSubmit al formulario para especificar las acciones a realizar
+
+- Formularios controlados :
+    - 
