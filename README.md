@@ -1,7 +1,7 @@
 # Aprendiendo React
 - [Clase 1 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-01-react/)
-- [Clase 2 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-02-react-formularios/) *Actualmente en esta*
-- [Clase 3 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-03-react-todo/)
+- [Clase 2 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-02-react-formularios/)
+- [Clase 3 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-03-react-todo/) *Actualmente en esta*
 - [Clase 4 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-04-react-api/)
 - [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/)
 - [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/)
@@ -53,6 +53,8 @@
 
 - Para llamar a funciones hay que hacerlo como si fueran etiquetas : <Componente/>
 
+- Se pueden crear componentes dentro de otros escribiendo `const nuevoComponente = () => ();` y añadiéndolo en una etiqueta JSX al *return*
+
 - Atributos :
     - El atributo `class` en HTML, en JSX es `className`
     - El atributo `for` en HTML, en JSX es `htmlFor`
@@ -94,7 +96,7 @@
     - Trabajaré con [React Hook Form](https://react-hook-form.com/) y [Formik](https://formik.org/)
     - En React, un <textarea> utiliza un atributo value para definir su texto
     - Se le asocia un evento onSubmit al formulario para especificar las acciones a realizar
-    - La etiqueta <input type="file" /> es un componente **no controlado**
+    - La etiqueta <input type="file" /> **es un componente no controlado**
 
 - Formularios no controlados (Uncontrolled Forms) :
     - Los datos del formulario son manejados por el propio DOM
@@ -106,3 +108,4 @@
 - Formularios controlados :
     - Los componentes React del formulario lo controlan con las entradas del usuario
     - Podremos controlar las entradas del usuario en tiempo real, usando nuevamente el hook `useState()`
+    - Para conseguir los valores de los diferentes campos de una manera más fácil ahorrando espacio, podemos hacer `const {variable1, variable2} = objeto` **pero tienen que tener el mismo nombre que las variables originales**
