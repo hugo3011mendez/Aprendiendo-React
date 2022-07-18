@@ -53,6 +53,11 @@
 
 - Para llamar a funciones hay que hacerlo como si fueran etiquetas : <Componente/>
 
+- Atributos :
+    - El atributo `class` en HTML, en JSX es `className`
+    - El atributo `for` en HTML, en JSX es `htmlFor`
+    - En los checkbox, en vez del atributo `value` es mejor usar el atributo `checked`
+
 - Funciones :
     - La nomenclatura de las funciones empieza por mayúscula
 
@@ -88,6 +93,8 @@
 - Formularios
     - Trabajaré con [React Hook Form](https://react-hook-form.com/) y [Formik](https://formik.org/)
     - En React, un <textarea> utiliza un atributo value para definir su texto
+    - Se le asocia un evento onSubmit al formulario para especificar las acciones a realizar
+    - La etiqueta <input type="file" /> es un componente **no controlado**
 
 - Formularios no controlados (Uncontrolled Forms) :
     - Los datos del formulario son manejados por el propio DOM
@@ -95,7 +102,7 @@
     - Las referencias proporcionan una forma de acceder a los nodos del DOM o a elementos React creados en el método de renderizado
     - Para usar los elementos se recomienda usar referencias en vez de un *GetElementById()* o un *QuerySelector()*
     - Se usa el hook `useRef()` para recoger los datos del form 
-    - Se le asocia un evento onSubmit al formulario para especificar las acciones a realizar
 
 - Formularios controlados :
-    - 
+    - Los componentes React del formulario lo controlan con las entradas del usuario
+    - Podremos controlar las entradas del usuario en tiempo real, usando nuevamente el hook `useState()`

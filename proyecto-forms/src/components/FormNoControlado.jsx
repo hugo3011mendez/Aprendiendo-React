@@ -1,10 +1,10 @@
-import { useRef } from "react";
+import { useRef } from "react"; // Importamos el hook
 
 const FormNoControlado = () => {
 
   const formulario = useRef(); // Hook para la referencia del formulario
 
-  // Función que determinará las acciones a realizar cuando se lance el evento onSubmit
+  // Función manejadora que determinará las acciones a realizar cuando se lance el evento onSubmit
   const handleSubmit = e => {
     e.preventDefault(); // Como en JS, prevengo la realización de las acciones por defecto
 
@@ -55,7 +55,7 @@ const FormNoControlado = () => {
             defaultValue="pendiente"
           >
             <option value="pendiente">Pendiente</option>
-            <option value="completada">Finalizada</option>
+            <option value="finalizada">Finalizada</option>
           </select>
 
           <button type="submit" className="btn btn-primary">
