@@ -24,6 +24,12 @@
 
 - Para descargar/instalar los módulos que usará el proyecto (node_modules) escribiremos en la terminal : `npm i`
 
+- En *public/index.html* podemos insertar Bootstrap si nos apetece
+
+- Ahora se eliminan todos los archivos en la carpeta *src* excepto *index.js*, el que modificaremos quitando las rutas de los archivos que hemos eliminado
+
+- Creamos *App.jsx* y escribiendo `rafce` establecemos el código del componente principal del proyecto
+
 
 ## Info Importante
 - React está basado en componentes, lo que significa que podemos separar el código de varias partes que se usen en una página web
@@ -91,12 +97,13 @@
     - `useState()` declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
     - `useState()` devolverá una pareja de valores : el estado actual y la función que lo actualiza
     - El hook `useRef()` se usa para las referencias y tendrá un argumento null
+    - El hook `useEffect()` 
     
 - Formularios
-    - Trabajaré con [React Hook Form](https://react-hook-form.com/) y [Formik](https://formik.org/)
     - En React, un <textarea> utiliza un atributo value para definir su texto
     - Se le asocia un evento onSubmit al formulario para especificar las acciones a realizar
     - La etiqueta <input type="file" /> **es un componente no controlado**
+    - [React Hook Form](https://react-hook-form.com/) y [Formik](https://formik.org/) son herramientas útiles
 
 - Formularios no controlados (Uncontrolled Forms) :
     - Los datos del formulario son manejados por el propio DOM
@@ -105,7 +112,35 @@
     - Para usar los elementos se recomienda usar referencias en vez de un *GetElementById()* o un *QuerySelector()*
     - Se usa el hook `useRef()` para recoger los datos del form 
 
-- Formularios controlados :
+- Formularios controlados (Controlled Forms) :
     - Los componentes React del formulario lo controlan con las entradas del usuario
     - Podremos controlar las entradas del usuario en tiempo real, usando nuevamente el hook `useState()`
     - Para conseguir los valores de los diferentes campos de una manera más fácil ahorrando espacio, podemos hacer `const {variable1, variable2} = objeto` **pero tienen que tener el mismo nombre que las variables originales**
+    - Se reinician los datos del form declarando un objeto `initialState` con los valores iniciales del form y estableciéndolo como parámetro en el método `setObjeto` del hook `useState`
+
+
+## [Sweet Alert 2](https://sweetalert2.github.io/#download)
+- Es un paquete para instalar con NPM
+
+- Se instala escribiendo el comando `npm install sweetalert2` en la terminal, dentro de la carpeta del proyecto
+
+- Se importa escribiendo `import Swal from 'sweetalert2'`
+
+- Uso :
+    - Se basa en una función `Swal.fire()`
+    - Dentro de la función hay varios atributos :
+        - `title: 'Error!'` para el título de la alerta
+        - `text: 'Do you want to continue'` para el texto que se mostrará en la alerta
+        - `icon: 'error'` para el tipo de icono de la alerta, se pueden ver todos los iconos disponibles en la [documentación](https://sweetalert2.github.io/#usage)
+        - `confirmButtonText: 'Cool'` para el texto que haya dentro del botón que cerrará la alerta, si se quiere que haya uno
+
+
+## [UUID](https://www.npmjs.com/package/uuid)
+- Es un paquete para instalar con NPM
+
+- Se instala escribiendo el comando `npm install uuid` en la terminal, dentro de la carpeta del proyecto
+
+- Se importa escribiendo `import { v4 as uuidv4 } from 'uuid';`
+
+- Uso :
+    - Simplemente usando la función `uuidv4()` proporciona el ID autogenerado
