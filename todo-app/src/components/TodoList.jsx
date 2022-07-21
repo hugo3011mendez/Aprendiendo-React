@@ -14,7 +14,10 @@ const TodoList = () => {
     }
   }, []); // Estableciendo estos corchetes como argumento de la función, se ejecutará sólo cuando se cargue el componente
 
-  
+  // Cada vez que se cambie algo en el array de tareas, se actualizará el array en el almacenamiento local
+  useEffect(() => {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+  }, [tareas]); // Estoy indicando que se ejecute cada vez que se cambie el array de tareas
 
   /**
    * Añade una tarea al array de tareas que este componente maneja

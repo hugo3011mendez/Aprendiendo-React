@@ -14,6 +14,9 @@
 
 ## Recursos
 - [React Developer Tools for Google Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
+- [Sweet Alert 2](https://sweetalert2.github.io/#download)
+- [UUID](https://www.npmjs.com/package/uuid)
+- [Netlify](https://app.netlify.com)
 
 
 ## Create React App
@@ -29,6 +32,11 @@
 - Ahora se eliminan todos los archivos en la carpeta *src* excepto *index.js*, el que modificaremos quitando las rutas de los archivos que hemos eliminado
 
 - Creamos *App.jsx* y escribiendo `rafce` establecemos el código del componente principal del proyecto
+
+- Con `npm run build` compilamos todo el proyecto y se crea la carpeta *build* que se trata del entorno de producción del proyecto
+    - Si el index.html de esa carpeta lo ejecutamos en un servidor, podrá funcionar todo tal cual como lo tenemos
+
+- Después, en la página [Netlify](https://app.netlify.com) podemos desplegar un servidor web arrastrando la carpeta *build*, sólo sirve para pruebas, nada comercial
 
 
 ## Info Importante
@@ -101,7 +109,7 @@
     - El hook `useRef()` se usa para las referencias y tendrá un argumento null
     - El hook `useEffect()` se ejecuta cada vez que se renderice el componente en el que se use
         - Se puede especificar que se ejecute sólo una vez, al cargar la página, escribiendo `[]` como segundo argumento de la función
-        - 
+        - Escribiendo una variable dentro de `[]` anteriormente mencionado, el hook se ejecutará cada vez que cambie dicha variable
 
 - Hooks personalizados :
     - Por estándar, se suele crear una carpeta dentro de *src* llamada *hooks*, donde ahí crearemos nuestros custom hooks
