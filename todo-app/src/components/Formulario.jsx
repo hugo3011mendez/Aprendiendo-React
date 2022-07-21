@@ -1,8 +1,8 @@
-import { useState } from "react";
 import Swal from 'sweetalert2'; // Importo el Sweet Alert 2
 import { v4 as uuidv4 } from 'uuid'; // Importo UUID
+import { useFormulario } from "../hooks/useFormulario"; // Importo el hook personalizado
 
-const Formulario = ({agregarTarea}) => { // Enlazo el método de su componente padre como prop
+const Formulario = ({agregarTarea}) => { // Consigo el método de su componente padre como prop
 
     // Declaro una variable con los valores iniciales que deben tomar los elementos del form
     const initialState = { // Deben tener el mismo nombre que el atributo name de cada elemento
@@ -12,30 +12,17 @@ const Formulario = ({agregarTarea}) => { // Enlazo el método de su componente p
         cbPrioridad: false
     };
 
-    const [tarea, setTarea] = useState(initialState); // Declaro el hook para que TodoList obtenga los valores
+    // Cambio el hook useState por el hook personalizado que he creado, consigo las variables que devuelvo en él
+    const [inputs, handleChange, reset] = useFormulario(initialState); 
 
-    const {txtNombre, txtDescripcion, estado, cbPrioridad} = tarea; // Destructuración de los valores de la tarea
+    const {txtNombre, txtDescripcion, estado, cbPrioridad} = inputs; // Destructuración de los valores de la tarea
 
-
-    /**
-     * Función para controlar el evento onChange
-     * @param {*} e Evento onChange
-     */
-    const handleChange = e => {
-        const {name, value, checked, type} = e.target;
-
-        setTarea(
-            // Uso las llaves para indicar que estoy devolviendo un objeto
-            // Hago una ternaria para que devuelva el atributo checked cuando se reciba de un checkbox
-            {...tarea, [name]: type === "checkbox" ? checked : value}
-        );
-    };
 
     /**
      * Función para controlar el evento onSubmit
      * @param {*} e Evento onSubmit
      */
-    const handleSubmit = e => { // Función para controlar el evento onSubmit
+    const handleSubmit = e => { // No meto esta función en el custom hook, porque no todos los forms se van a validar de esta manera
         e.preventDefault();
 
         if (!txtNombre.trim()) {
@@ -80,8 +67,9 @@ const Formulario = ({agregarTarea}) => { // Enlazo el método de su componente p
             id: uuidv4() // Uso el paquete UUID para darle una ID única a la tarea
         });
 
-        setTarea(initialState); // Así, después de haber añadido una tarea con éxito, reinicio los campos del formulario
+        reset(); // Reinicio los campos del formulario gracias al método en el hook personalizado
     };
+
 
   return (
     <>
@@ -99,7 +87,7 @@ const Formulario = ({agregarTarea}) => { // Enlazo el método de su componente p
             <div className="form-check"> {/* En el caso del checkbox es el atributo checked */}
                 <input name="cbPrioridad" className="form-check-input" type="checkbox" checked={cbPrioridad} onChange={handleChange} />
                 <label className="form-check-label" htmlFor="cbPrioridad">
-                    Dar Prioridad
+                    Prioritaria
                 </label>
             </div>
 

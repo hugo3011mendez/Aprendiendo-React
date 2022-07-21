@@ -76,6 +76,7 @@
 - Eventos :
     - Los eventos se se nombran usando camelCase, en vez de minúsculas
     - Con JSX se pasa una función dentro de una lambda como el manejador del evento, en vez de un string
+    - Si le asignamos una función a un evento, hacerlo siempre con una lambda : `evento = {() => funcion()}`
     
 - Componentes :
     - App.jsx debe estar en el mismo nivel de estructura de carpetas que index.js
@@ -88,6 +89,7 @@
 - Props :
     - Cuando React ve un elemento representando un componente definido por el usuario, pasa atributos JSX e hijos a este componente como un solo objeto
     - Son de sólo lectura, no se pueden modificar en el componente en el que los vamos a usar
+    - En el componente que recoja los props, podemos escribir `{objeto}` en vez de `props`
 
 - Estados / Hooks :
     - Permiten a los componentes de React cambiar su salida a lo largo del tiempo en respuesta a acciones del usuario, respuestas de red y cualquier otra cosa
@@ -97,7 +99,16 @@
     - `useState()` declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
     - `useState()` devolverá una pareja de valores : el estado actual y la función que lo actualiza
     - El hook `useRef()` se usa para las referencias y tendrá un argumento null
-    - El hook `useEffect()` 
+    - El hook `useEffect()` se ejecuta cada vez que se renderice el componente en el que se use
+        - Se puede especificar que se ejecute sólo una vez, al cargar la página, escribiendo `[]` como segundo argumento de la función
+        - 
+
+- Hooks personalizados :
+    - Por estándar, se suele crear una carpeta dentro de *src* llamada *hooks*, donde ahí crearemos nuestros custom hooks
+    - Un custom hook puede ser un archivo de JavaScript, ya que no devolverá nada de JSX
+    - Podemos generar la estructura del hook escribiendo el snippet `rafc`
+    - En ellos se suele usar toda la lógica genérica para un tipo de componente (como por ejemplo, un formulario)
+        - También se pueden incorporar funciones que controlen eventos y se puedan usar en más de un componente
     
 - Formularios
     - En React, un <textarea> utiliza un atributo value para definir su texto
