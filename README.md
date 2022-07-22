@@ -105,11 +105,13 @@
     - No funcionan dentro de las clases, te permiten usar React sin clases
     - Un estado o hook que modifica el estado de un componente para que cuando un valor cambie gracias a acciones del usuario se renderice
     - `useState()` declara una variable de estado, este tipo de variables son conservadas por React y su único argumento es el estado inicial
-    - `useState()` devolverá una pareja de valores : el estado actual y la función que lo actualiza
+        - Devolverá una pareja de valores : el estado actual y la función que lo actualiza
     - El hook `useRef()` se usa para las referencias y tendrá un argumento null
     - El hook `useEffect()` se ejecuta cada vez que se renderice el componente en el que se use
-        - Se puede especificar que se ejecute sólo una vez, al cargar la página, escribiendo `[]` como segundo argumento de la función
-        - Escribiendo una variable dentro de `[]` anteriormente mencionado, el hook se ejecutará cada vez que cambie dicha variable
+        - Se puede especificar que se ejecute sólo una vez, al cargar el componente, escribiendo `[]` como segundo argumento de la función
+        - Escribiendo una  o más variables separadas por comas dentro del `[]` anteriormente mencionado, el hook se ejecutará cada vez que cambien dichas variables
+        - Aunque se recomienda que se esriba un `useEffect()` por cada variable de la que queramos estar pendientes
+        - Usando el snippet de `useEffect` vendrá un return con una función de saneamiento
 
 - Hooks personalizados :
     - Por estándar, se suele crear una carpeta dentro de *src* llamada *hooks*, donde ahí crearemos nuestros custom hooks
@@ -163,3 +165,12 @@
 
 - Uso :
     - Simplemente usando la función `uuidv4()` proporciona el ID autogenerado
+
+
+## Usando APIs
+- En este caso probaremos a recoger info de la [API de Rick & Morty](https://rickandmortyapi.com/)
+
+- Para hacer solicitudes a una API :
+    - Hay que hacer una función asíncrona `async() => {};` donde se realiza la petición a la API y se trata la respuesta obtenida
+    - Después se puede jugar con los campos de la respuesta, comprobando diferentes datos
+    - Para conseguir los datos se guarda en una variable la respuesta en formato JSON `respuesta.json()` y a partir de ahí se puede mostrar toda la info
