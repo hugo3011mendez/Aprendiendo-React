@@ -200,3 +200,9 @@
             - También le tenemos que colocar el componente al que se va a dirigir, con el atributo `element={<Componente />}`
         - Si queremos que un `<Route />` se muestre dentro de otro, simplemente anidamos la ruta en *index.js* y escribimos `<Outlet />` dentro del componente donde queramos que se muestre
             - Si queremos pintar un componente en la misma ruta que su padre, escribiremos `<Route index element={<Componente />} />`
+
+- NavLink :
+    - Es una manera de poner enlaces activos
+    - Con esto el botón que corresponda al componente que estoy viendo se quedará resaltado mientras que los botones de los demás seguirán igual
+    - Uso :
+        - Se cambia por la importación y la etiqueta `Link` 

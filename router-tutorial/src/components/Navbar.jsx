@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-dark bg-dark">
         <div className="container"> {/* Así centro los elementos del Navbar */}
-            <Link to="/" className="btn btn-outline-primary">Inicio</Link>
-            <Link to="/blog" className="btn btn-outline-primary">Blog</Link>
-            <Link to="/contacto" className="btn btn-outline-primary">Contacto</Link>
+            <NavLink to="/" className="btn btn-outline-primary">Inicio</NavLink>
+            <NavLink to="/blog" className="btn btn-outline-primary">Blog</NavLink>
+            <NavLink to="/contacto" className="btn btn-outline-primary">Contacto</NavLink>
         </div>
     </nav>
   )
