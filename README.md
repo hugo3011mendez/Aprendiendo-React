@@ -174,3 +174,29 @@
     - Hay que hacer una función asíncrona `async() => {};` donde se realiza la petición a la API y se trata la respuesta obtenida
     - Después se puede jugar con los campos de la respuesta, comprobando diferentes datos
     - Para conseguir los datos se guarda en una variable la respuesta en formato JSON `respuesta.json()` y a partir de ahí se puede mostrar toda la info
+
+
+## Router v6
+- React Router es una biblioteca de enrutamiento de páginas web del lado del servidor y del cliente con todas las funciones para React, se ejecuta en cualquier lugar donde se ejecute React; en la web, en el servidor con node.js y en React Native
+
+- De base, estaríamos trabajando con React Router v5 y podemos actualizar a React Router v6
+
+- Para instalarla en el proyecto, se usará el comando `npm i react-router-dom@6` en la terminal
+
+- Conectar con la URL del navegador :
+    - Importo el BrowserRouter en *index.js* escribiendo `import { BrowserRouter } from "react-router-dom"`;
+    - Añado la etiqueta `<BrowserRouter></BrowserRouter>`, dentro de ella irá `<App />`
+    - La etiqueta `<Link></Link>` sirve de ancla en el DOM
+        - En vez de con un *href*, con el atributo `to="/"` le indicamos la URL a la que debe ir
+        - Si le especificamos el atributo `className=""` se comportará de igual manera que cualquier otro elemento
+    
+- Rutas :
+    - Ponemos las rutas en la carpeta *routes* o *views* dentro de la carpeta *src*
+    - Creamos un componente de React por cada ruta
+    - Importamos `Routes` y `Route` en el componente en el que queramos colocar las anclas (normalmente será *index.js*)
+    - Dentro de la etiqueta `<Routes> </Routes>` van las rutas, que se escriben dentro de la etiqueta `<Route> </Route>` y representan la URL y el componente que será dibujado
+        - A esa etiqueta `<Route> </Route>` le colocamos el atributo `path="/"` en el que pondremos la URL a la que tiene que estar enlazada
+            - Si el path es `path="/"`, lo normal es que eliminemos más abajo la etiqueta `<App />`
+            - También le tenemos que colocar el componente al que se va a dirigir, con el atributo `element={<Componente />}`
+        - Si queremos que un `<Route />` se muestre dentro de otro, simplemente anidamos la ruta en *index.js* y escribimos `<Outlet />` dentro del componente donde queramos que se muestre
+            - Si queremos pintar un componente en la misma ruta que su padre, escribiremos `<Route index element={<Componente />} />`
