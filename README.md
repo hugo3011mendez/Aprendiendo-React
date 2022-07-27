@@ -17,6 +17,8 @@
 - [Sweet Alert 2](https://sweetalert2.github.io/#download)
 - [UUID](https://www.npmjs.com/package/uuid)
 - [Netlify](https://app.netlify.com)
+- [API de Rick & Morty](https://rickandmortyapi.com/)
+- [JSON Placeholder API](https://jsonplaceholder.typicode.com/)
 
 
 ## Create React App
