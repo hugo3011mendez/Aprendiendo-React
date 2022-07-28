@@ -3,8 +3,8 @@
 - [Clase 2 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-02-react-formularios/)
 - [Clase 3 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-03-react-todo/) 
 - [Clase 4 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-04-react-api/)
-- [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/) *Actualmente en esta*
-- [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/)
+- [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/)
+- [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/) **Actualmente en esta**
 
 
 ## Requisitos
@@ -44,6 +44,9 @@
     - Si el index.html de esa carpeta lo ejecutamos en un servidor, podrá funcionar todo tal cual como lo tenemos
 
 - Después, en la página [Netlify](https://app.netlify.com) podemos desplegar un servidor web arrastrando la carpeta *build*, sólo sirve para pruebas, nada comercial
+
+- Si en Netlify no funcionan los parámetros en la URL, debemos crear dentro de la carpeta *public* el archivo *_redirects*
+    - Y dentro de dicho archivo escribir el siguiente código : `/* /index.html 200`
 
 
 ## Info Importante
