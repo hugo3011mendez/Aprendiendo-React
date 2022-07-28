@@ -21,6 +21,11 @@
 - [JSON Placeholder API](https://jsonplaceholder.typicode.com/)
 
 
+## Proyectos subidos a [Netlify](https://app.netlify.com)
+- [ToDo App](https://prueba-react-todo-app.netlify.app/)
+- [API de Rick & Morty](https://prueba-react-api-rick-and-morty.netlify.app/)
+- [Router v6](https://prueba-react-router-v6.netlify.app/)
+
 ## Create React App
 - Comandos para crear un proyecto en React
     - `npx create-react-app nombre-de-app`
@@ -197,7 +202,7 @@
     - Creamos un componente de React por cada ruta
     - Importamos `Routes` y `Route` en el componente en el que queramos colocar las anclas (normalmente será *index.js*)
     - Dentro de la etiqueta `<Routes> </Routes>` van las rutas, que se escriben dentro de la etiqueta `<Route> </Route>` y representan la URL y el componente que será dibujado
-        - A esa etiqueta `<Route> </Route>` le colocamos el atributo `path="/"` en el que pondremos la URL a la que tiene que estar enlazada
+        - A esa etiqueta `<Route />` le colocamos el atributo `path="/"` en el que pondremos la URL a la que tiene que estar enlazada
             - Si el path es `path="/"`, lo normal es que eliminemos más abajo la etiqueta `<App />`
             - También le tenemos que colocar el componente al que se va a dirigir, con el atributo `element={<Componente />}`
         - Si queremos que un `<Route />` se muestre dentro de otro, simplemente anidamos la ruta en *index.js* y escribimos `<Outlet />` dentro del componente donde queramos que se muestre
@@ -207,4 +212,17 @@
     - Es una manera de poner enlaces activos
     - Con esto el botón que corresponda al componente que estoy viendo se quedará resaltado mientras que los botones de los demás seguirán igual
     - Uso :
-        - Se cambia por la importación y la etiqueta `Link` 
+        - Se cambia por la importación y la etiqueta `Link`
+
+- Parámetros :
+    - Dentro de la etiqueta `<Route />` en *index.js*, podemos especificar un parámetro dinámico en la URL de la siguiente manera
+    - `<Route path='/ruta/:id' element={<Ruta />} />`
+    - Para recoger este parámetro en el componente referente a la ruta, se guarda `useParams()` en una variable
+    - Y después para usar el parámetro establecido simplemente hay que llamar a `params.id` en este caso
+
+- Parámetros de Búsqueda :
+    - `useSearchParams()` funciona de manera muy similar a `useState()` pero lo que hace es una consulta a la URL del estilo `https://app.com/blog?filter=prueba`
+    - Se declara de la siguiente manera : `let [searchParams, setSearchParams] = useSearchParams();`
+    - Para establecer un parámetro de búsqueda en la URL utilizamos `setSearchParams({nombreParametro});` siendo `nombreParametro` una variable llamada como el parámetro y con el valor que queremos que tenga el parámetro
+    - Si en la URL tenemos `https://app.com/blog?nombreParametro=prueba` y se ejecuta `searchParams.get("nombreParametro")`, devolverá el valor del parámetro que en este caso es `prueba`
+    - Se puede jugar con estos filtros de parámetros, para después realizar un `variableArray.filter().map()` y filtrar las entradas de datos en la página según se escriba algo para la búsqueda
