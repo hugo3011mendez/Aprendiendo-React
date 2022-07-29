@@ -122,7 +122,7 @@
         - Escribiendo una  o más variables separadas por comas dentro del `[]` anteriormente mencionado, el hook se ejecutará cada vez que cambien dichas variables
         - Aunque se recomienda que se esriba un `useEffect()` por cada variable de la que queramos estar pendientes
         - Usando el snippet de `useEffect` vendrá un return con una función de saneamiento
-
+        
 - Hooks personalizados :
     - Por estándar, se suele crear una carpeta dentro de *src* llamada *hooks*, donde ahí crearemos nuestros custom hooks
     - Un custom hook puede ser un archivo de JavaScript, ya que no devolverá nada de JSX
