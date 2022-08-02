@@ -122,6 +122,14 @@
         - Escribiendo una  o más variables separadas por comas dentro del `[]` anteriormente mencionado, el hook se ejecutará cada vez que cambien dichas variables
         - Aunque se recomienda que se esriba un `useEffect()` por cada variable de la que queramos estar pendientes
         - Usando el snippet de `useEffect` vendrá un return con una función de saneamiento
+    - El hook `useContext()` se usa cuando se complica el uso de props para pasar datos entre componentes, es una forma de obtener datos de un lugar a otro
+        - Está diseñado para compartir datos que pueden considerarse “globales” para un árbol de componentes en React
+    - Una alternativa a `useContext()` es **Redux**
+        - Viene con un depurador que viaja en el tiempo
+        - Proporciona una API de middleware que le brinda acceso a herramientas
+        - Sus enlaces de React evitan muchos renderizados innecesarios
+        - Si deseas una herramienta que te ayude a administrar su estado, Redux es una excelente opción
+        - Redux también se puede usar con JavaScript nativo, es externo a React
         
 - Hooks personalizados :
     - Por estándar, se suele crear una carpeta dentro de *src* llamada *hooks*, donde ahí crearemos nuestros custom hooks
@@ -229,3 +237,7 @@
     - Para establecer un parámetro de búsqueda en la URL utilizamos `setSearchParams({nombreParametro});` siendo `nombreParametro` una variable llamada como el parámetro y con el valor que queremos que tenga el parámetro
     - Si en la URL tenemos `https://app.com/blog?nombreParametro=prueba` y se ejecuta `searchParams.get("nombreParametro")`, devolverá el valor del parámetro que en este caso es `prueba`
     - Se puede jugar con estos filtros de parámetros, para después realizar un `variableArray.filter().map()` y filtrar las entradas de datos en la página según se escriba algo para la búsqueda
+
+
+## Context API
+- Es una forma de poder hacer que la comunicación entre componentes sea de manera sencilla y sin complicaciones
