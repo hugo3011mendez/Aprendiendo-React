@@ -16,7 +16,7 @@ const UserProvider = (props) => { // Los demás componentes que estemos viendo a
 
   return (
     <div>
-        <UserContext.Provider value={{ user, signIn, signOut }}>
+        <UserContext.Provider value={{user, signIn, signOut}}>
           {props.children} {/* Meto a los demás componentes en el Provider */}
         </UserContext.Provider>
     </div>

@@ -219,6 +219,11 @@
             - También le tenemos que colocar el componente al que se va a dirigir, con el atributo `element={<Componente />}`
         - Si queremos que un `<Route />` se muestre dentro de otro, simplemente anidamos la ruta en *index.js* y escribimos `<Outlet />` dentro del componente donde queramos que se muestre
             - Si queremos pintar un componente en la misma ruta que su padre, escribiremos `<Route index element={<Componente />} />`
+    - Rutas protegidas :
+        - Sirven para que la gente no pueda acceder a páginas donde un usuario se autentique, paneles de admin, etc...
+        - Primero creo un componente referente a la ruta protegida
+        - Después creo otro componente con una verificación, como por ejemplo, una verificación de usuario
+        - Añado la verificación al index, y dentro de su etiqueta meto la ruta protegida
 
 - NavLink :
     - Es una manera de poner enlaces activos
