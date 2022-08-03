@@ -122,9 +122,10 @@
         - Escribiendo una  o más variables separadas por comas dentro del `[]` anteriormente mencionado, el hook se ejecutará cada vez que cambien dichas variables
         - Aunque se recomienda que se esriba un `useEffect()` por cada variable de la que queramos estar pendientes
         - Usando el snippet de `useEffect` vendrá un return con una función de saneamiento
-    - El hook `useContext()` se usa cuando se complica el uso de props para pasar datos entre componentes, es una forma de obtener datos de un lugar a otro
+    - El hook `useContext(Contexto)` se usa cuando se complica el uso de props para pasar datos entre componentes, es una forma de obtener datos de un lugar a otro
         - Está diseñado para compartir datos que pueden considerarse “globales” para un árbol de componentes en React
-    - Una alternativa a `useContext()` es **Redux**
+        - Gracias a este hook se pueden recoger las variables del contexto en el que esté metido el componente donde se use
+    - Una alternativa a `useContext` es **Redux**
         - Viene con un depurador que viaja en el tiempo
         - Proporciona una API de middleware que le brinda acceso a herramientas
         - Sus enlaces de React evitan muchos renderizados innecesarios
@@ -241,3 +242,11 @@
 
 ## Context API
 - Es una forma de poder hacer que la comunicación entre componentes sea de manera sencilla y sin complicaciones
+
+- Formas de uso :
+    - Primero se crea el contexto, un objeto Context, usando la palabra `export` y la función `createContext()` : `export const VarContext = createContext();`
+    - Dentro se mostrará en una etiqueta el Provider del contexto, teniendo como value un objeto compuesto por todas las variables y funciones que necesitemos : `<VarContext.Provider value={{var, func1, func2}} > {children} </VarContext.Provider>`
+    - Después se importa en el *index.js* : `import VarProvider from '../context/VarProvider';`
+    - Pero para acceder al value del contexto, se tiene que usar `VarContext`
+    - En *index.js* meto los componentes que me interese que accedan, dentro de una etiqueta `<VarProvider> </VarProvider>`
+    - En los componentes donde queramos hacerlo, para acceder a dichas variables del contexto debemos usar el hook `useContext` : `const {var, func1, func2} = useContext(VarContext);`
