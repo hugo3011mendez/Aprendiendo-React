@@ -5,8 +5,7 @@
 - [Clase 4 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-04-react-api/)
 - [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/)
 - [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/)
-- **Actualmente ya he terminado el curso**
-- Pendiente de aprender a usar BBDD con React
+- [Vídeo para aprender React con PHP y MySQL](https://www.youtube.com/watch?v=A1S1v-DRgP0) **Actualmente aquí**
 
 
 ## Requisitos
@@ -27,6 +26,7 @@
 - [ToDo App](https://prueba-react-todo-app.netlify.app/)
 - [API de Rick & Morty](https://prueba-react-api-rick-and-morty.netlify.app/)
 - [Router v6](https://prueba-react-router-v6.netlify.app/)
+- [Context API](https://prueba-react-context-api.netlify.app/)
 
 ## Create React App
 - Comandos para crear un proyecto en React
@@ -257,3 +257,7 @@
     - Pero para acceder al value del contexto, se tiene que usar `VarContext`
     - En *index.js* meto los componentes que me interese que accedan, dentro de una etiqueta `<VarProvider> </VarProvider>`
     - En los componentes donde queramos hacerlo, para acceder a dichas variables del contexto debemos usar el hook `useContext` : `const {var, func1, func2} = useContext(VarContext);`
+
+
+## React con PHP y MySQL
+- Pendiente de empezar
