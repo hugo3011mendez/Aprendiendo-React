@@ -1,6 +1,6 @@
 import { useContext } from "react"; // Importaciones de hooks
 import { Link, NavLink } from "react-router-dom";
-import { UserContext } from "../context/UserProvider";
+import { UserContext } from "../context/UserProvider"; // Importo el contexto del Usuario
 
 const Navbar = () => {
   const {user} = useContext(UserContext); // Sólo necesitaré el nombre del usuario

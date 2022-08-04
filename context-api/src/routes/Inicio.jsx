@@ -17,7 +17,7 @@ const Inicio = () => {
         user ? (
           <>
             <button className="btn btn-danger" onClick={signOut}> Cerrar sesión </button>
-            <Link to="/protegida" className='btn btn-warning'>Ruta Protegida</Link>
+            <Link to="/protegida" className='btn btn-warning'>Ruta Protegida</Link> {/* Añado un botón que llevará hasta el componente de la ruta protegida */}
           </>
         ) 
         :

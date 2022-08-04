@@ -1,4 +1,4 @@
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar"; // Importación de componentes
 import { Outlet } from "react-router-dom";
 
 const App = () => { // Me tomo App como una plantilla, donde se mostrarán los demás componentes

@@ -6,6 +6,7 @@ export const UserContext = createContext();
 const UserProvider = (props) => { // Los demás componentes que estemos viendo accederán aquí
 
   const [user, setUser] = useState(false); // Por defecto está en falso
+
   // Funciones referentes al inicio y al cierre de sesión del usuario
   const signIn = () => {
     setUser(true);
@@ -15,7 +16,7 @@ const UserProvider = (props) => { // Los demás componentes que estemos viendo a
   };
 
   return (
-    <div>
+    <div> {/* Uso el contexto para pasar la info que quiero que los demás componentes puedan acceder */}
         <UserContext.Provider value={{user, signIn, signOut}}>
           {props.children} {/* Meto a los demás componentes en el Provider */}
         </UserContext.Provider>
