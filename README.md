@@ -1,11 +1,13 @@
 # Aprendiendo React
 - [Clase 1 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-01-react/)
 - [Clase 2 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-02-react-formularios/)
-- [Clase 3 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-03-react-todo/) 
+- [Clase 3 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-03-react-todo/)
 - [Clase 4 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-04-react-api/)
 - [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/)
 - [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/)
-- [Vídeo para aprender React con PHP y MySQL](https://www.youtube.com/watch?v=A1S1v-DRgP0) **Actualmente aquí**
+**Actualmente aquí**
+- [Vídeo para aprender React con PHP y MySQL](https://www.youtube.com/watch?v=A1S1v-DRgP0)
+- [Web donde explica React con PHP y MySQL](https://parzibyte.me/blog/2020/12/19/php-react-ejemplo-aplicacion-web/)
 
 
 ## Requisitos
@@ -260,4 +262,7 @@
 
 
 ## React con PHP y MySQL
-- Pendiente de empezar
+- Para hacer una aplicación web creada totalmente con React que consume archivos de PHP a través de AJAX con JSON.
+- Tengo que tener :
+    - Proyectos separados referentes a cliente y servidor
+    - Un archivo PHP con las funciones relacionadas a la BBDD
