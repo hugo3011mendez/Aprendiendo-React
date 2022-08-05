@@ -263,6 +263,10 @@
 
 ## React con PHP y MySQL
 - Para hacer una aplicación web creada totalmente con React que consume archivos de PHP a través de AJAX con JSON.
+
 - Tengo que tener :
     - Proyectos separados referentes a cliente y servidor
     - Un archivo PHP con las funciones relacionadas a la BBDD
+
+- Primero desarrollo el servidor (Los archivos PHP) y después debería desarrollar el cliente
+    - Para que funcione todo, debería poner en la carpeta *htdocs* los archivos del servidor y pegar ahí los archivos dentro de la carpeta *build* del proyecto de React
