@@ -21,6 +21,8 @@
 - [Netlify](https://app.netlify.com)
 - [API de Rick & Morty](https://rickandmortyapi.com/)
 - [JSON Placeholder API](https://jsonplaceholder.typicode.com/)
+- [Repositorio PHP API](https://github.com/parzibyte/api-php-react)
+- [Repositorio React Cliente API PHP](https://github.com/parzibyte/react-cliente-api-php)
 
 
 ## Proyectos subidos a [Netlify](https://app.netlify.com)
