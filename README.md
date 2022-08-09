@@ -267,3 +267,13 @@
 
 - Primero desarrollo el servidor (Los archivos PHP) y después debería desarrollar el cliente
     - Para que funcione todo, debería poner en la carpeta *htdocs* los archivos del servidor y pegar ahí los archivos dentro de la carpeta *build* del proyecto de React
+    - CRUD :
+        - Create :
+            - 
+        - Read :
+            - Que al llamar al PHP devuelva el resultado de la query codificado en JSON con `json_encode(mysqli_fetch_all(mysqli_query($conexion, sentencia)))`
+            - En React, se consumen esos datos como si se tratara de una API usando `fetch()` y se muestran como tal
+        - Update :
+            - 
+        - Delete :
+            - 
