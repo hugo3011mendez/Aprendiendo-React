@@ -5,9 +5,7 @@
 - [Clase 4 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-04-react-api/)
 - [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/)
 - [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/)
-- [Vídeo para aprender React con PHP y MySQL](https://www.youtube.com/watch?v=A1S1v-DRgP0) **Actualmente aquí**
-- [Web donde explica React con PHP y MySQL](https://parzibyte.me/blog/2020/12/19/php-react-ejemplo-aplicacion-web/)
-
+- [Vídeo para aprender React con PHP y MySQL](https://www.youtube.com/watch?v=_DJBFUIT2Kg) **Actualmente aquí**
 
 ## Requisitos
 - [Extensión de VS Code para React](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
@@ -21,8 +19,6 @@
 - [Netlify](https://app.netlify.com)
 - [API de Rick & Morty](https://rickandmortyapi.com/)
 - [JSON Placeholder API](https://jsonplaceholder.typicode.com/)
-- [Repositorio PHP API](https://github.com/parzibyte/api-php-react)
-- [Repositorio React Cliente API PHP](https://github.com/parzibyte/react-cliente-api-php)
 
 
 ## Proyectos subidos a [Netlify](https://app.netlify.com)
