@@ -108,6 +108,7 @@
 - Props :
     - Cuando React ve un elemento representando un componente definido por el usuario, pasa atributos JSX e hijos a este componente como un solo objeto
     - Son de sólo lectura, no se pueden modificar en el componente en el que los vamos a usar
+    - Cuando se muestre el componente al que le queremos pasar el prop, escribiremos `<Componente nombreVariableProp={variable} />`
     - En el componente que recoja los props, podemos escribir `{objeto}` en vez de `props`
 
 - Estados / Hooks :

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useFetch } from '../hooks/useFetch';
 import Loading from './Loading';
 
@@ -35,7 +36,7 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
                 <td>{item.rol}</td>
                 <td> {/* Botones referentes a acciones que podremos hacer con un usuario */}
                   <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-warning">Editar</button>
+                    <Link to="/editUsuario" className="btn btn-warning"> Editar </Link> {/* Pasar la ID del usuario aquí como prop */}
                     <button type="button" className="btn btn-danger ms-1">Borrar</button>
                   </div>
                 </td>
