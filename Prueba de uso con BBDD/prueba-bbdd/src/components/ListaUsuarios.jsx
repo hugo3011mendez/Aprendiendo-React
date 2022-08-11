@@ -15,6 +15,22 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
     return <h2>{error}</h2>
   }
 
+  /**
+   * Realiza una petición a la API y al server para eliminar el usuario indicado 
+   * @param {*} id La ID del usuario
+   */
+  function eliminarUsuario(id){
+    // Me comunico con la API
+    // FIXME : Syntax error de JSON => SyntaxError: Unexpected non-whitespace character after JSON at position 13
+    fetch("https://localhost/PruebaReactConBBDD/?eliminarUsuario="+id)
+    .then(res => res.json()) // Realizo la petición
+    .then((datosRespuesta) => {
+      console.log(datosRespuesta); // Muestro los datos obtenidos en respuesta del server
+      window.location.reload(); // Recargo la página para que se muestren los datos actualizados
+    })
+    .catch(e => console.log(e)); // Si algo falla, muestro el mensaje de error   
+  }
+
   return (
     <table className='table'>
         <thead>
@@ -37,7 +53,8 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
                 <td> {/* Botones referentes a acciones que podremos hacer con un usuario */}
                   <div className="btn-group" role="group" aria-label="Basic example">
                     <Link to="/editUsuario" className="btn btn-warning"> Editar </Link> {/* TODO : Pasar la ID del usuario aquí como prop? */}
-                    <button type="button" className="btn btn-danger ms-1">Borrar</button>
+                    {/* Le asigno al evento onClick una función para eliminar el usuario de la BBDD */}
+                    <button type="button" className="btn btn-danger ms-1" onClick={() => eliminarUsuario(item.id)}>Borrar</button>
                   </div>
                 </td>
               </tr>              
