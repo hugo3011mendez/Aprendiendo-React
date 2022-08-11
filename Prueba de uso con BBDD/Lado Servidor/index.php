@@ -28,12 +28,21 @@
     
     // CREATE :
     if (isset($_GET["registrarUsuario"])) {
-        if(registrarUsuario($conexion, $_GET["txtEmail"], $_GET["txtNickname"], $_GET["txtPassword"], "a", $_GET["rol"])){
+        $data = json_decode(file_get_contents("php://input")); // Consigo los datos que el usuario ha escrito
+        // Los guardo en sus variables correspondientes
+        $email = $data->txtEmail;
+        $nickname = $data->txtNickname;
+        $password = md5($data->txtPassword);
+        $imagen = "a";
+        $rol = $data->rol;
+
+        if(registrarUsuario($conexion, $email, $nickname, $password, $imagen, $rol)){
             echo json_encode(["success"=>1]);
         }
         else {
             echo json_encode(["error"=>99]);
         }
+
         exit();
     }
 

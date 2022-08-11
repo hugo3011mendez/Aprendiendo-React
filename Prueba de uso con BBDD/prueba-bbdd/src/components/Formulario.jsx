@@ -1,5 +1,5 @@
 import { useState } from "react"; // Importamos el hook de React
-import { useFormulario } from "../hooks/useFormulario";
+import { useFormulario } from "../hooks/useFormulario"; // Importamos el hook personalizado
 
 const Formulario = () => {
 
@@ -28,11 +28,19 @@ const Formulario = () => {
       setError(true); // Cambio el error a true ya que hay espacios vacíos
       console.log("ERROR : Hay datos vacíos");
     }
-    else{ // TODO : Cuando se valide bien
+    else{
       console.log("Email : " + txtEmail);
       console.log("Nickname : " + txtNickname);
       console.log("Contraseña : " + txtPassword);
       console.log("Rol : " + rol);
+      
+      // Defino el cuerpo del mensaje que le mandaré a la API con los datos introducidos
+      const datosEnviar = {"txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol)};
+      console.log(JSON.stringify(datosEnviar));
+      // Me comunico con la API
+      fetch("https://localhost/PruebaReactConBBDD/?registrarUsuario=1", {method:"POST", body:JSON.stringify(datosEnviar)}) // FIXME : Sale syntax error JSON
+      .then(res => res.json()) // Realizo la petición
+      .catch(e => console.log(e)) // Si algo falla, muestro el mensaje de error
 
       reset(); // Al final de todo reinicio los campos
     }

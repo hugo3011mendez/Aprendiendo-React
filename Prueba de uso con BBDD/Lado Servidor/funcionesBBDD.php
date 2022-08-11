@@ -83,7 +83,6 @@
     function registrarUsuario($conexion, $email, $nickname, $password, $imagen, $rol){
         $conexion->autocommit(FALSE); // Desactivo el autocommit
 
-        $password = md5($password); // Primero hasheo la contraseña para guardarla en la BBDD
         $yaRegistrado = false; // Booleano para indicar si el email del usuario ya está en la BBDD
         $sentencia = "SELECT * FROM ".TABLA_USUARIOS." WHERE email = '".$email."'"; // Armo la sentencia
         $resultado = mysqli_query($conexion, $sentencia); // Guardo el resultado de la ejecución de la sentencia para recorrerse

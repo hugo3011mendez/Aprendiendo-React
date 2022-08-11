@@ -270,6 +270,9 @@
     - Para que funcione todo, debería poner en la carpeta *htdocs* los archivos del servidor y pegar ahí los archivos dentro de la carpeta *build* del proyecto de React
     - CRUD :
         - Create :
+            - Primero se debe hacer un formulario desde el que se escribirán los datos del nuevo elemento
+            - Consumo los datos PHP como si se tratara de una API usando `fetch()`
+                - Esta vez, en la dirección del navegador uso `https://localhost/carpeta/?create=1` para que sepa qué código devolver
             - 
         - Read :
             - Que al llamar al PHP devuelva el resultado de la query codificado en JSON con `json_encode(mysqli_fetch_all(mysqli_query($conexion, sentencia)))`
