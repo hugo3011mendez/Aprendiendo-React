@@ -35,10 +35,7 @@ const Formulario = () => {
       const datosEnviar = {"txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol)};
       const cuerpo = JSON.stringify(datosEnviar);
       // Me comunico con la API
-      fetch("https://localhost/PruebaReactConBBDD/?registrarUsuario=1", {
-        method:"POST",
-        body:cuerpo
-      })
+      fetch("https://localhost/PruebaReactConBBDD/?registrarUsuario=1", {method:"POST", body:cuerpo})
       .then(res => res.json()) // Realizo la petición
       .catch(e => console.log(e)) // Si algo falla, muestro el mensaje de error
 

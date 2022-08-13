@@ -3,6 +3,8 @@
     include "cors.php"; // IMPORTANTE incluir el CORS
 
     $conexionBBDD = conectarBBDD(); // Consigo la conexión a la BBDD
+    $conexion->autocommit(FALSE); // Desactivo el autocommit
+
 
     
     // CREATE :
@@ -45,13 +47,22 @@
 
 
     // READ :
-    // Codifico los usuarios de la BBDD
-    $sentencia = "SELECT * FROM ".TABLA_USUARIOS.";";
-    $resultado = mysqli_query($conexionBBDD, $sentencia); // Guardo el resultado de la ejecución de la sentencia para recorrerse
-
-    if(mysqli_num_rows($resultado) > 0){
-        $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
-        echo json_encode($usuarios);
-        exit();
+    if (isset($_GET["listaUsuarios"])) {
+        // Codifico los usuarios de la BBDD
+        $sentencia = "SELECT * FROM ".TABLA_USUARIOS.";";
+        $resultado = mysqli_query($conexionBBDD, $sentencia); // Guardo el resultado de la ejecución de la sentencia para recorrerse
+    
+        if(mysqli_num_rows($resultado) > 0){
+            $usuarios = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+            echo json_encode($usuarios);
+            exit();
+        }
     }
+
+    // // TODO : Para ver las filas afectadas por la query
+    // $consulta = "DELETE FROM ".TABLA_TAREAS." WHERE proyecto = 1";
+    // if($result = mysqli_query($conexionBBDD, $consulta)){
+    //     // echo mysqli_affected_rows($conexionBBDD);
+    //     echo $result;
+    // }
 ?>

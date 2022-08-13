@@ -5,7 +5,7 @@ import Loading from './Loading';
 const ListaUsuarios = () => { // Referente a listar los usuarios
 
   // Consigo los datos del hook personalizado llamándolo y pasándole la URL a la que quiero realizarla
-  const {data, error, loading} = useFetch("https://localhost/PruebaReactConBBDD/");
+  const {data, error, loading} = useFetch("https://localhost/PruebaReactConBBDD/?listaUsuarios=1");
   
   if (loading) { // Compruebo que esté cargando los datos para mostrar el spinner
     return <Loading />;
@@ -20,15 +20,17 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
    * @param {*} id La ID del usuario
    */
   function eliminarUsuario(id){
+    const url = "https://localhost/PruebaReactConBBDD/?eliminarUsuario="+id; // Armo la URL
     // Me comunico con la API
     // FIXME : Syntax error de JSON => SyntaxError: Unexpected non-whitespace character after JSON at position 13
-    fetch("https://localhost/PruebaReactConBBDD/?eliminarUsuario="+id)
+    fetch(url)
     .then(res => res.json()) // Realizo la petición
+    // .then(res => console.log(res.json())) // Realizo la petición
     .then((datosRespuesta) => {
       console.log(datosRespuesta); // Muestro los datos obtenidos en respuesta del server
       window.location.reload(); // Recargo la página para que se muestren los datos actualizados
     })
-    .catch(e => console.log(e)); // Si algo falla, muestro el mensaje de error   
+    .catch(e => console.log(e)); // Si algo falla, muestro el mensaje de error
   }
 
   return (

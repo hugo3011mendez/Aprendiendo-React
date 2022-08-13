@@ -271,13 +271,21 @@
     - CRUD :
         - Create :
             - Primero se debe hacer un formulario desde el que se escribirán los datos del nuevo elemento
+            - Recojo los datos del form como si fuera un objeto : `const datos = {"txt1":txt1, "txt2":txt2};`
+            - Creo un objeto JSON con los valores introducidos del form : `const cuerpo = JSON.stringify(datos)`
             - Consumo los datos PHP como si se tratara de una API usando `fetch()`
                 - Esta vez, en la dirección del navegador uso `https://localhost/carpeta/?create=1` para que sepa qué código devolver
-            - 
+                - El segundo parámetro será un objeto formado por el método y el cuerpo de la petición : `{method:"POST", body:cuerpo}`
+                - Después sigue como un `fetch()` normal
         - Read :
             - Que al llamar al PHP devuelva el resultado de la query codificado en JSON con `json_encode(mysqli_fetch_all(mysqli_query($conexion, sentencia)))`
             - En React, se consumen esos datos como si se tratara de una API usando `fetch()` y se muestran como tal
         - Update :
             - 
         - Delete :
-            - 
+            - Meto lo siguiente en una función para que se ejecute cuando se active el botón de borrar :
+                - Consumo los datos PHP como si se tratara de una API usando `fetch()`
+                    - Esta vez, en la dirección del navegador uso `https://localhost/carpeta/?delete=ID` para especificar la ID del dato a borrar
+                    - Puedo recargar la página usando `.then((datosRespuesta) => {window.location.reload();}`
+                    - Después sigue como un `fetch()` normal
+        

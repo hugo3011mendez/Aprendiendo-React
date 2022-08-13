@@ -81,7 +81,6 @@
      * @return Boolean indicando si la acción resultó con errores
      */ 
     function registrarUsuario($conexion, $email, $nickname, $password, $imagen, $rol){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
 
         $yaRegistrado = false; // Booleano para indicar si el email del usuario ya está en la BBDD
         $sentencia = "SELECT * FROM ".TABLA_USUARIOS." WHERE email = '".$email."'"; // Armo la sentencia
@@ -202,8 +201,7 @@
      * @return Boolean indicando si la acción resultó con errores
      */
     function eliminarUsuario($conexion, $id){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
-
+        // FIXME : Comprobar en los proyectos y las tareas el caso de que no haya nada que eliminar
         // Primero tengo que eliminar los proyectos del usuario, debido a que su ID es clave foránea en la tabla de proyectos
         if (eliminarProyectosDeUsuario($conexion, $id)) {
             $sentencia = "DELETE FROM ".TABLA_USUARIOS." WHERE id = ".$id.";"; // Armo la sentencia
@@ -225,11 +223,13 @@
         $resultado = mysqli_query($conexion, $sentencia); // Guardo su resultado
 
         while ($proyecto = $resultado -> fetch_object()) { // Recorro todos los proyectos en su tabla correspondiente
-            if ($proyecto -> usuario_creador == $idUsuario) { // En el caso de que el proyecto actual pertenece al usuario
-                // Ejecuto la función que elimina un proyecto y todas sus tareas de la base de datos
-                return eliminarProyecto($conexion, $proyecto); // Y devuelvo un booleano según su resultado
+            // Ejecuto la función que elimina un proyecto y todas sus tareas de la base de datos
+            if (!eliminarProyecto($conexion, $proyecto, true)) {
+                return accionesDeError($conexion, "Uno de los proyectos no se ha podido eliminar");
             }
         }
+
+        return true; // Si ha llegado hasta aquí se supone que todo ha salido bien, así que devuelvo directamente un true
     }
 
 
@@ -266,7 +266,6 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function crearRol($conexion, $nombre, $privilegios){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
 
         $sentencia = "INSERT INTO ".TABLA_ROLES." (nombre, privilegios) VALUES('".$nombre."', ".$privilegios.")";
 
@@ -286,7 +285,6 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function actualizarRol($conexion, $nombre, $privilegios, $id){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         // Compruebo si alguno de estos dos valores es null, para autocompletarlo con el existente en la BBDD
         if (is_null($nombre)) {
@@ -343,7 +341,6 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function eliminarRol($conexion, $id){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         // Armo la sentencia
         $sentencia = "DELETE FROM ".TABLA_ROLES." WHERE id = ".$id;
@@ -368,7 +365,6 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function crearProyecto($conexion, $idCreador, $nombre, $descripcion){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         // Armo la sentencia de creación
         $sentencia = "INSERT INTO ".TABLA_PROYECTOS." (usuario_creador, nombre, descripcion, fecha_creacion) VALUES (".
@@ -393,7 +389,6 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function actualizarProyecto($conexion, $nombre, $descripcion, $id){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         // Compruebo si alguno de estos dos datos es null para autocompletarlo con el existente en la BBDD
         if (is_null($nombre)) {
@@ -446,19 +441,24 @@
      * 
      * @param $conexion La conexión con la base de datos
      * @param $proyecto El objeto o la ID del proyecto que va a ser eliminado, y sobre el que se van a eliminar todas las tareas
+     * @param $grupo Booleano indicando si se están eliminando todos los proyectos
      * 
      * @return Boolean indicando si la acción resultó con errores
      */
-    function eliminarProyecto($conexion, $proyecto){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
+    function eliminarProyecto($conexion, $proyecto, $grupo){
         
         if (is_object($proyecto)) { // Si la variable se trata de un objeto representando al proyecto
             if (eliminarTodasTareas($conexion, $proyecto)) { // Compruebo que haya salido bien la realización de esta función
-                
                 // Si sale bien, armo la consulta para eliminar el proyecto
                 $sentencia = "DELETE FROM ".TABLA_PROYECTOS." WHERE id =".$proyecto-> id;
-                // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-                return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar el proyecto ".$proyecto-> nombre.". ".$conexion-> connect_error);
+
+                if ($grupo) { // Si estoy intentando eliminar todos los proyectos
+                    return mysqli_query($conexion, $sentencia); // Devuelvo el resultado de la query
+                }
+                else {
+                    // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
+                    return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar el proyecto ".$proyecto-> nombre.". ".$conexion-> connect_error);                    
+                }
             }
             else {
                 // Devuelvo el resultado de las acciones de error
@@ -489,7 +489,6 @@
      * @return Boolean indicando si la acción resultó con errores
      */
     function eliminarTodasTareas($conexion, $proyecto){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         // Armo la sentencia para eliminar todas las tareas según el tipo de variable que sea el parámetro referente al proyecto
         if (is_object($proyecto)) { // Si el parámetro es el objeto del proyecto
@@ -521,7 +520,6 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function crearTarea($conexion, $nombre, $descripcion, $proyecto, $parentID, $estado){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
 
         // Quiero comprobar primero si el proyecto en el que se quiere insertar la tarea existe en su tabla, usando su ID
         $existe = false; // Booleana para comprobar si el proyecto existe
@@ -567,7 +565,6 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function actualizarTarea($conexion, $id, $nombre, $descripcion, $parentID, $estado){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         // Compruebo si alguno de estos dos datos es null para autocompletarlo con el existente en la BBDD
         if (is_null($nombre)) {
@@ -644,7 +641,6 @@
      * @return Boolean indicando si la acción resultó con errores
      */
     function eliminarTarea($conexion, $tarea){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         if (is_object($tarea)) { // Si la variable es un objeto de tipo tarea
             // Primero elimino las subtareas de la tarea que se quiere eliminar
@@ -686,7 +682,6 @@
      * @return Boolean indicando si la acción resultó con errores
      */
     function eliminarSubtareas($conexion, $tarea){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
         
         if (is_object($tarea)) { // Si la variable es un objeto de tipo tarea
             // Intento eliminar las subtareas
@@ -710,7 +705,6 @@
      * @return Boolean Indicando el resultado de la función
      */
     function finalizarTarea($conexion, $idTarea){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
 
         // Primero, intento finalizar sus subtareas
         if (finalizarSubtareas($conexion, $idTarea)) { // Compruebo el resultado de la función que intenta finalizar las subtareas de la tarea
@@ -752,7 +746,6 @@
      * @return Boolean Indicando el resultado de la función
      */
     function ponerEnPendiente($conexion, $id){
-        $conexion->autocommit(FALSE); // Desactivo el autocommit
 
         // Primero consigo la ID de su tarea padre si la tiene
         $sentencia = "SELECT * FROM ".TABLA_TAREAS." WHERE id=".$id.";";
