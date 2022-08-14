@@ -119,78 +119,12 @@
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
     function actualizarUsuario($conexion, $id, $email, $nickname, $password, $imagen, $rol){
-        // Compruebo si algún dato es null, para guardar en su lugar el que hay en la BBDD
-        if (is_null($email)) {
-            $email = conseguirDatoUsuario($conexion, $id, 0);
-        }
-
-        if (is_null($nickname)) {
-            $nickname = conseguirDatoUsuario($conexion, $id, 1);
-        }
-
-        if (is_null($password)) {
-            $password = conseguirDatoUsuario($conexion, $id, 2);
-        }
-        else{
-            $password = md5($password); // Hasheo la contraseña para actualizar el dato en la BBDD
-        }
-
-        if (is_null($imagen)) {
-            $imagen = conseguirDatoUsuario($conexion, $id, 3);
-        }
-
-        if (is_null($rol)) {
-            $rol = conseguirDatoUsuario($conexion, $id, 4);
-        }
-
         // Armo la sentencia
         $sentencia = "UPDATE ".TABLA_USUARIOS." SET email = '".$email."', nickname = '".$nickname."', pwd = '".$password."', imagen = '".$imagen."' WHERE id = ".$id;
         
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
         return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al actualizar el usuario. ".$conexion-> connect_error);       
     }
-
-
-    /**
-     * Según la ID del usuario y el código del dato, consigo y devuelvo el indicado de la BBDD
-     * 
-     * @param $conexion La conexión con la base de datos
-     * @param $id La ID del usuario sobre el que buscaremos el dato
-     * @param $dato Código numérico que indicará qué dato tenemos que obtener
-     * 
-     * @return Dato El dato que necesitamos conseguir
-     */
-    function conseguirDatoUsuario($conexion, $id, $codigoDato){
-        $sentencia = "SELECT * FROM ".TABLA_USUARIOS." WHERE id = ".$id;
-        $resultado = mysqli_query($conexion, $sentencia); // Guardo el resultado de la ejecución de la sentencia para recorrerse
-        // Recorro el resultado de la consulta y compruebo si la ID coincide
-        while ($usuario = $resultado -> fetch_object()) {
-            if ($usuario-> id == $id) {
-                switch ($codigoDato) { // Según el código de dato, devuelvo el dato correspondiente
-                    case 0:
-                        return $usuario-> email; 
-                        break;
-        
-                    case 1:
-                        return $usuario-> nickname; 
-                        break;
-        
-                    case 2:
-                        return $usuario-> pwd; 
-                        break;
-        
-                    case 3:
-                        return $usuario-> imagen; 
-                        break;
-        
-                    case 4:
-                        return $usuario-> rol;
-                        break;
-                }
-            }
-        }
-    }
-
 
     /**
      * Elimina el usuario cuya ID coincida con la pasada como parámetro

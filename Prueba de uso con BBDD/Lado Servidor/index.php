@@ -30,11 +30,16 @@
     if (isset($_GET["actualizarUsuario"])){
         $data = json_decode(file_get_contents("php://input")); // Consigo los datos que el usuario ha escrito
         // Los guardo en sus variables correspondientes
+        $id = $data->id;
         $email = $data->txtEmail;
         $nickname = $data->txtNickname;
-        $password = $data->txtPassword;
         $imagen = "a";
         $rol = $data->rol;
+
+        $pwdCambiada = $data->flag; // Consigo la variable
+        $password = ""; // Inicializo la variable referente a la PWD
+        $pwdCambiada?$password=md5($data->txtPassword):$password = $data->txtPassword; // Compruebo la flag y establezco la PWD
+
 
         if(actualizarUsuario($conexionBBDD, $id, $email, $nickname, $password, "a", $rol)){
             echo json_encode(["success"=>1]);

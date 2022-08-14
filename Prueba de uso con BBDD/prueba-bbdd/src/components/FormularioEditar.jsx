@@ -32,7 +32,8 @@ const FormularioEditar = ({usuario}) => {
     }
     else{     
       // Defino el cuerpo del mensaje que le mandaré a la API con los datos editados
-      const datosEnviar = {"txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol)};
+      // Añado el campo ID para la misma y el campo flag para saber si la contraseña ha sido editada
+      const datosEnviar = {"id":usuario.id, "txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol), "flag":txtPassword===usuario.pwd?false:true};
       const cuerpo = JSON.stringify(datosEnviar);
       console.log(cuerpo);
       // Me comunico con la API
