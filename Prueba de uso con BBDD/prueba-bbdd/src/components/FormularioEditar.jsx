@@ -1,18 +1,18 @@
 import { useState } from "react"; // Importamos el hook de React
 import { useFormulario } from "../hooks/useFormulario"; // Importamos el hook personalizado
 
-const Formulario = () => {
+const FormularioEditar = ({usuario}) => {
 
   // Declaro una variable con los valores iniciales que deben tomar los elementos del form
   const initialState = { // Deben tener el mismo nombre que el atributo name de cada elemento
-    txtEmail: "",
-    txtNickname: "",
-    txtPassword: "",
-    rol: null
+    txtEmail: usuario.email,
+    txtNickname: usuario.nickname,
+    txtPassword: usuario.pwd,
+    rol: usuario.rol
   };
 
   const [error, setError] = useState(false); // Un hook referente al error, por defecto a false
-  const [introducido, setIntroducido] = useState(false); // Un hook referente a si se acaba de introducir un usuario, por defecto a false
+  const [editado, setEditado] = useState(false); // Un hook referente a si se acaba de editar un usuario, por defecto a false
   
   const [inputs, handleChange, reset] = useFormulario(initialState); // Uso el hook personalizado en Utils
   const {txtEmail, txtNickname, txtPassword, rol} = inputs; // Destructuración de los valores de los inputs
@@ -26,21 +26,23 @@ const Formulario = () => {
     e.preventDefault();
     
     if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim()) {
-      setIntroducido(false); // Pongo el introducido a false para que no se muestre la alerta
+      setEditado(false); // Pongo el editado a false para que no se muestre la alerta
       setError(true); // Cambio el error a true ya que hay espacios vacíos
       console.log("ERROR : Hay datos vacíos");
     }
     else{     
-      // Defino el cuerpo del mensaje que le mandaré a la API con los datos introducidos
+      // Defino el cuerpo del mensaje que le mandaré a la API con los datos editados
       const datosEnviar = {"txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol)};
       const cuerpo = JSON.stringify(datosEnviar);
+      console.log(cuerpo);
       // Me comunico con la API
-      fetch("https://localhost/PruebaReactConBBDD/?registrarUsuario=1", {method:"POST", body:cuerpo})
+      // FIXME : Error JSON => Unexpected token '<', "<br /> <b>"... is not valid JSON
+      fetch("https://localhost/PruebaReactConBBDD/?actualizarUsuario=1", {method:"POST", body:cuerpo})
       .then(res => res.json()) // Realizo la petición
       .catch(e => console.log(e)) // Si algo falla, muestro el mensaje de error
 
-      setIntroducido(true); // Pongo la booleana a true
-      reset(); // Al final de todo reinicio los campos
+      setEditado(true); // Pongo la booleana a true
+      // window.location.reload(); // Finalmente recargo la página para que se muestren los datos actualizados
     }
   };
 
@@ -50,8 +52,8 @@ const Formulario = () => {
   );
 
   // Creo un nuevo componente pequeño, referente a mostrar el mensaje de éxito
-  const PintarINSERT = () => (
-    <div className="alert alert-success" role="alert">Se ha introducido el nuevo usuario con éxito</div>
+  const PintarEDIT = () => (
+    <div className="alert alert-success" role="alert">Se ha editado la información del usuario {usuario.nickname} con éxito</div>
   );
 
 
@@ -63,13 +65,12 @@ const Formulario = () => {
       {error && <PintarError />} {/* Con '&&' se hace una ternaria con sólo el caso afirmativo */}
 
       {/* Compruebo si se acaba de introducir un usuario con el hook, y en caso afirmativo pinto el mensaje */}
-      {introducido && <PintarINSERT />} {/* Con '&&' se hace una ternaria con sólo el caso afirmativo */}
+      {editado && <PintarEDIT />} {/* Con '&&' se hace una ternaria con sólo el caso afirmativo */}
 
       <form onSubmit={handleSubmit}> {/* Le paso el hook a la referencia y le adjunto el evento onSubmit */}
         <input
           type="text"
           name="txtEmail"
-          placeholder="Escribe el Email del nuevo usuario"
           className="form-control mb-2" 
           onChange={handleChange}
           value={txtEmail}
@@ -78,7 +79,6 @@ const Formulario = () => {
         <input
           type="text"
           name="txtNickname"
-          placeholder="Escribe el Nickname del nuevo usuario"
           className="form-control mb-2"
           onChange={handleChange}
           value={txtNickname}
@@ -87,7 +87,6 @@ const Formulario = () => {
         <input
           type="password"
           name="txtPassword"
-          placeholder="Escribe la constraseña del nuevo usuario"
           className="form-control mb-2"
           onChange={handleChange}
           value={txtPassword}
@@ -107,10 +106,10 @@ const Formulario = () => {
           </label>
         </div>
 
-        <button type="submit" className="btn btn-primary">Añadir</button>
+        <button type="submit" className="btn btn-warning">Editar</button>
       </form>
     </>
   )
 }
 
-export default Formulario
+export default FormularioEditar

@@ -95,7 +95,7 @@
 
         if (!$yaRegistrado) { // Si finalmente el email no está en la tabla de la BBDD
             // Armo la sentencia
-            $sentencia = "INSERT INTO ".TABLA_USUARIOS." (email, nickname, pwd, imagen, rol) VALUES('".$email."', '".$nickname."', '".$password."', '".$imagen."', ".$rol.")";
+            $sentencia = "INSERT INTO ".TABLA_USUARIOS." (email, nickname, pwd, imagen, rol) VALUES('".$email."', '".$nickname."', '".md5($password)."', '".$imagen."', ".$rol.")";
             // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
             return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al registrar al usuario. ".$conexion-> connect_error);       
         }
@@ -201,7 +201,6 @@
      * @return Boolean indicando si la acción resultó con errores
      */
     function eliminarUsuario($conexion, $id){
-        // FIXME : Comprobar en los proyectos y las tareas el caso de que no haya nada que eliminar
         // Primero tengo que eliminar los proyectos del usuario, debido a que su ID es clave foránea en la tabla de proyectos
         if (eliminarProyectosDeUsuario($conexion, $id)) {
             $sentencia = "DELETE FROM ".TABLA_USUARIOS." WHERE id = ".$id.";"; // Armo la sentencia

@@ -3,7 +3,7 @@
     include "cors.php"; // IMPORTANTE incluir el CORS
 
     $conexionBBDD = conectarBBDD(); // Consigo la conexión a la BBDD
-    $conexion->autocommit(FALSE); // Desactivo el autocommit
+    $conexionBBDD->autocommit(FALSE); // Desactivo el autocommit
 
 
     
@@ -13,7 +13,7 @@
         // Los guardo en sus variables correspondientes
         $email = $data->txtEmail;
         $nickname = $data->txtNickname;
-        $password = md5($data->txtPassword);
+        $password = $data->txtPassword;
         $imagen = "a";
         $rol = $data->rol;
 
@@ -28,7 +28,15 @@
 
     // UPDATE :
     if (isset($_GET["actualizarUsuario"])){
-        if(actualizarUsuario($conexionBBDD, $id, $GET["txtEmail"], $_GET["txtNickname"], $_GET["txtPassword"], "a", $_GET["rol"])){ // TODO : Ver ID
+        $data = json_decode(file_get_contents("php://input")); // Consigo los datos que el usuario ha escrito
+        // Los guardo en sus variables correspondientes
+        $email = $data->txtEmail;
+        $nickname = $data->txtNickname;
+        $password = $data->txtPassword;
+        $imagen = "a";
+        $rol = $data->rol;
+
+        if(actualizarUsuario($conexionBBDD, $id, $email, $nickname, $password, "a", $rol)){
             echo json_encode(["success"=>1]);
         }
         else {echo json_encode(["success"=>0]);}
@@ -59,10 +67,15 @@
         }
     }
 
-    // // TODO : Para ver las filas afectadas por la query
-    // $consulta = "DELETE FROM ".TABLA_TAREAS." WHERE proyecto = 1";
-    // if($result = mysqli_query($conexionBBDD, $consulta)){
-    //     // echo mysqli_affected_rows($conexionBBDD);
-    //     echo $result;
-    // }
+    // $_GET["conseguirUsuario"] es la ID del usuario
+    if (isset($_GET["conseguirUsuario"])) {
+        $sentencia = "SELECT * FROM ".TABLA_USUARIOS." WHERE id=".$_GET["conseguirUsuario"].";";
+        $resultado = mysqli_query($conexionBBDD, $sentencia); // Guardo el resultado de la ejecución de la sentencia para recorrerse
+
+        if(mysqli_num_rows($resultado) > 0){
+            $usuario = mysqli_fetch_all($resultado, MYSQLI_ASSOC);
+            echo json_encode($usuario);
+            exit();
+        }
+    }
 ?>

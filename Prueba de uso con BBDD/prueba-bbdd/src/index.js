@@ -18,7 +18,7 @@ root.render(
         <Route path='/' element={<App />}> {/* Para que se muestren las rutas dentro de App, hay que anidarlas y en App.jsx escribir <Outlet /> donde se quieran mostrar */}
           <Route index element={<Inicio />} /> {/* Este componente comparte la ruta de App */}
           <Route path='/addUsuario' element={<AddUsuario />} /> {/* Para añadir un usuario a la BBDD */}
-          <Route path='/editUsuario' element={<EditUsuario />} /> {/* Para editar un usuario en la BBDD */}
+          <Route path='/editUsuario/:id' element={<EditUsuario />} /> {/* Para editar un usuario en la BBDD */}
           <Route path='*' element={<PageNotFound />} /> {/* Este componente se mostrará cada vez que se ponga en la URL algo diferente a las páginas declaradas */}
         </Route>
       </Routes>

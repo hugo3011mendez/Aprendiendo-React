@@ -10,7 +10,7 @@ export const useFetch = (url) => { // Este hook recibe la URL a la que realizamo
         fetch(url)
             .then(res => res.json()) // Luego realizo la petición
             .then(data => setData(data)) // Consigo los datos
-            .catch(e => setError("Error de servidor")) // Si algo falla, consigo el mensaje de error
+            .catch(e => setError("No hay registros")) // Si algo falla, consigo el mensaje de error
             .finally(() => setLoading(false)) // Finalmente después de todo eso, dejo de cargar
     }, [url]);
 
