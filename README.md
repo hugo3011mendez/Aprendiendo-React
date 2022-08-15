@@ -281,7 +281,7 @@
             - Que al llamar al PHP devuelva el resultado de la query codificado en JSON con `json_encode(mysqli_fetch_all(mysqli_query($conexion, sentencia)))`
             - En React, se consumen esos datos como si se tratara de una API usando `fetch()` y se muestran como tal
         - Update :
-            - 
+            - Lo mismo que en Create, pero llamando a una función PHP que actualice el registro de la BBDD
         - Delete :
             - Meto lo siguiente en una función para que se ejecute cuando se active el botón de borrar :
                 - Consumo los datos PHP como si se tratara de una API usando `fetch()`

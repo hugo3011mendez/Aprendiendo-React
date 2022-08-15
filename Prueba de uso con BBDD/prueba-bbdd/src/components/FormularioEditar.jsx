@@ -8,7 +8,7 @@ const FormularioEditar = ({usuario}) => {
     txtEmail: usuario.email,
     txtNickname: usuario.nickname,
     txtPassword: usuario.pwd,
-    rol: usuario.rol
+    rol: null
   };
 
   const [error, setError] = useState(false); // Un hook referente al error, por defecto a false
@@ -25,7 +25,7 @@ const FormularioEditar = ({usuario}) => {
   const handleSubmit = e => {
     e.preventDefault();
     
-    if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim()) {
+    if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim() || rol == null) {
       setEditado(false); // Pongo el editado a false para que no se muestre la alerta
       setError(true); // Cambio el error a true ya que hay espacios vacíos
       console.log("ERROR : Hay datos vacíos");
@@ -33,23 +33,27 @@ const FormularioEditar = ({usuario}) => {
     else{     
       // Defino el cuerpo del mensaje que le mandaré a la API con los datos editados
       // Añado el campo ID para la misma y el campo flag para saber si la contraseña ha sido editada
-      const datosEnviar = {"id":usuario.id, "txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol), "flag":txtPassword===usuario.pwd?false:true};
+      const datosEnviar = {"id":parseInt(usuario.id), "txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol), "flag":txtPassword===usuario.pwd?false:true};
       const cuerpo = JSON.stringify(datosEnviar);
-      console.log(cuerpo);
-      // Me comunico con la API
-      // FIXME : Error JSON => Unexpected token '<', "<br /> <b>"... is not valid JSON
-      fetch("https://localhost/PruebaReactConBBDD/?actualizarUsuario=1", {method:"POST", body:cuerpo})
-      .then(res => res.json()) // Realizo la petición
-      .catch(e => console.log(e)) // Si algo falla, muestro el mensaje de error
 
-      setEditado(true); // Pongo la booleana a true
+      // Me comunico con la API
+      // FIXME : Error JSON => Unexpected token '<', "<br /> <fo"... is not valid JSON
+      fetch("https://localhost/PruebaReactConBBDD/?actualizarUsuario=1", {method:"POST", body:cuerpo})
+      .then(res => console.log(res.json())) // Realizo la petición
+      .then(datosRespuesta => {
+        console.log(datosRespuesta); // FIXME : Devuelve undefined en vez de {"success":1} o {"success":0}, así que el problema es haciendo el fetch()
+      })
+      .catch(e => console.log(e)) // Si algo falla, muestro el mensaje de error
+      
+      setEditado(true); // Pongo la booleana a true      
+
       // window.location.reload(); // Finalmente recargo la página para que se muestren los datos actualizados
     }
   };
 
   // Creo un nuevo componente pequeño, referente a mostrar el error
   const PintarError = () => (
-    <div className="alert alert-danger" role="alert">txts los campos son obligatorios</div>
+    <div className="alert alert-danger" role="alert">Todos los campos son obligatorios</div>
   );
 
   // Creo un nuevo componente pequeño, referente a mostrar el mensaje de éxito
@@ -60,8 +64,6 @@ const FormularioEditar = ({usuario}) => {
 
   return (
     <>
-      <h2>Formulario Controlado</h2>
-
       {/* Compruebo si existe algún error con el hook, y en caso afirmativo pinto el mensaje */}
       {error && <PintarError />} {/* Con '&&' se hace una ternaria con sólo el caso afirmativo */}
 
@@ -94,7 +96,7 @@ const FormularioEditar = ({usuario}) => {
         /> {/* Le asocio el evento onChange referenciando a su función manejadora y el valor a cambiar correspondiente */}
 
         {/* Radio Buttons referentes al rol del usuario : */}
-        <div className="form-check">
+        <div className="form-check"> {/* TODO : Saber cómo comprobar rol para que el correspondiente esté checkado */}
           <input className="form-check-input" type="radio" name="rol" id="rol1" value={1} onChange={handleChange} />
           <label className="form-check-label" htmlFor="rol1">
             Usuario

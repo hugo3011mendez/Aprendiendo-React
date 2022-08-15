@@ -38,8 +38,7 @@
 
         $pwdCambiada = $data->flag; // Consigo la variable
         $password = ""; // Inicializo la variable referente a la PWD
-        $pwdCambiada?$password=md5($data->txtPassword):$password = $data->txtPassword; // Compruebo la flag y establezco la PWD
-
+        $pwdCambiada ? $password = md5($data->txtPassword) : $password = $data->txtPassword; // Compruebo la flag y establezco la PWD
 
         if(actualizarUsuario($conexionBBDD, $id, $email, $nickname, $password, "a", $rol)){
             echo json_encode(["success"=>1]);

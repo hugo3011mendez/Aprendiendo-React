@@ -25,7 +25,7 @@ const Formulario = () => {
   const handleSubmit = e => {
     e.preventDefault();
     
-    if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim()) {
+    if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim() || rol == null) {
       setIntroducido(false); // Pongo el introducido a false para que no se muestre la alerta
       setError(true); // Cambio el error a true ya que hay espacios vacíos
       console.log("ERROR : Hay datos vacíos");
@@ -39,7 +39,8 @@ const Formulario = () => {
       .then(res => res.json()) // Realizo la petición
       .catch(e => console.log(e)) // Si algo falla, muestro el mensaje de error
 
-      setIntroducido(true); // Pongo la booleana a true
+      setIntroducido(true); // Pongo la booleana a true        
+
       reset(); // Al final de todo reinicio los campos
     }
   };
@@ -57,8 +58,6 @@ const Formulario = () => {
 
   return (
     <>
-      <h2>Formulario Controlado</h2>
-
       {/* Compruebo si existe algún error con el hook, y en caso afirmativo pinto el mensaje */}
       {error && <PintarError />} {/* Con '&&' se hace una ternaria con sólo el caso afirmativo */}
 

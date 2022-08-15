@@ -53,7 +53,7 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
                 <td>{item.rol}</td>
                 <td> {/* Botones referentes a acciones que podremos hacer con un usuario */}
                   <div className="btn-group" role="group" aria-label="Basic example">
-                    <Link to={"/editUsuario/"+item.id} className="btn btn-warning"> Editar </Link> {/* TODO : Pasar la ID del usuario aquí como prop? */}
+                    <Link to={"/editUsuario/"+item.id} className="btn btn-warning"> Editar </Link>
                     {/* Le asigno al evento onClick una función para eliminar el usuario de la BBDD */}
                     <button type="button" className="btn btn-danger ms-1" onClick={() => eliminarUsuario(item.id)}>Borrar</button>
                   </div>
