@@ -26,7 +26,7 @@ const EditUsuario = () => {
       {
         data.map(item =>
           <>
-            <h1>{item.nickname}</h1>
+            <h1>Datos de {item.nickname}</h1>
             <FormularioEditar usuario={item} />
           </> 
         )

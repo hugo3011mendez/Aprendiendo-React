@@ -1,5 +1,6 @@
 import { useState } from "react"; // Importamos el hook de React
 import { useFormulario } from "../hooks/useFormulario"; // Importamos el hook personalizado
+import API from '../services/API'; // Importo la constante referente a la API
 
 const Formulario = () => {
 
@@ -35,9 +36,17 @@ const Formulario = () => {
       const datosEnviar = {"txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol)};
       const cuerpo = JSON.stringify(datosEnviar);
       // Me comunico con la API
-      fetch("https://localhost/PruebaReactConBBDD/?registrarUsuario=1", {method:"POST", body:cuerpo})
+      fetch(API+"?registrarUsuario=1", {method:"POST", body:cuerpo})
       .then(res => res.json()) // Realizo la petición
-      .catch(e => console.log(e)) // Si algo falla, muestro el mensaje de error
+      .catch(e => {
+        if (e) { // Si algo falla, muestro el mensaje de error
+          console.log(e);
+          setError(true);
+        }
+        else{ // Si no hay error, recargo la página para que se muestren los datos actualizados
+          window.location.reload();
+        }
+      }) // Si algo falla, muestro el mensaje de error
 
       setIntroducido(true); // Pongo la booleana a true        
 

@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useFetch } from '../hooks/useFetch';
 import Loading from './Loading';
+import API from '../services/API'; // Importo la constante referente a la API
 
 const ListaUsuarios = () => { // Referente a listar los usuarios
 
   // Consigo los datos del hook personalizado llamándolo y pasándole la URL a la que quiero realizarla
-  const {data, error, loading} = useFetch("https://localhost/PruebaReactConBBDD/?listaUsuarios=1");
+  const {data, error, loading} = useFetch(API+"?listaUsuarios=1");
   
   if (loading) { // Compruebo que esté cargando los datos para mostrar el spinner
     return <Loading />;
@@ -20,7 +21,7 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
    * @param {*} id La ID del usuario
    */
   function eliminarUsuario(id){
-    const url = "https://localhost/PruebaReactConBBDD/?eliminarUsuario="+id; // Armo la URL
+    const url = API+"?eliminarUsuario="+id; // Armo la URL
     // Me comunico con la API
     fetch(url)
     .then(res => res.json()) // Realizo la petición
