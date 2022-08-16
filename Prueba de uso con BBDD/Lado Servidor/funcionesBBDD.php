@@ -80,7 +80,7 @@
      * 
      * @return Boolean indicando si la acción resultó con errores
      */ 
-    function registrarUsuario($conexion, $email, $nickname, $password, $imagen, $rol){
+    function registrarUsuario($conexion, $email, $nickname, $password, $rol){
 
         $yaRegistrado = false; // Booleano para indicar si el email del usuario ya está en la BBDD
         $sentencia = "SELECT * FROM ".TABLA_USUARIOS." WHERE email = '".$email."'"; // Armo la sentencia
@@ -95,7 +95,7 @@
 
         if (!$yaRegistrado) { // Si finalmente el email no está en la tabla de la BBDD
             // Armo la sentencia
-            $sentencia = "INSERT INTO ".TABLA_USUARIOS." (email, nickname, pwd, imagen, rol) VALUES('".$email."', '".$nickname."', '".md5($password)."', '".$imagen."', ".$rol.")";
+            $sentencia = "INSERT INTO ".TABLA_USUARIOS." (email, nickname, pwd, imagen, rol) VALUES('".$email."', '".$nickname."', '".md5($password)."', ".$rol.")";
             // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
             return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al registrar al usuario. ".$conexion-> connect_error);       
         }
@@ -118,9 +118,9 @@
      * 
      * @return Boolean Indicando el resultado de la ejecución de la función
      */
-    function actualizarUsuario($conexion, $id, $email, $nickname, $password, $imagen, $rol){
+    function actualizarUsuario($conexion, $id, $email, $nickname, $password, $rol){
         // Armo la sentencia
-        $sentencia = "UPDATE ".TABLA_USUARIOS." SET email = '".$email."', nickname = '".$nickname."', pwd = '".$password."', imagen = '".$imagen.", rol =".$rol." WHERE id = ".$id;
+        $sentencia = "UPDATE ".TABLA_USUARIOS." SET email = '".$email."', nickname = '".$nickname."', pwd = '".$password.", rol =".$rol." WHERE id = ".$id;
         
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
         return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al actualizar el usuario. ".$conexion-> connect_error);       

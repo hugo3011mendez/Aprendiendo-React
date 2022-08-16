@@ -14,10 +14,9 @@
         $email = $data->txtEmail;
         $nickname = $data->txtNickname;
         $password = $data->txtPassword;
-        $imagen = "a";
         $rol = $data->rol;
 
-        if(registrarUsuario($conexionBBDD, $email, $nickname, $password, $imagen, $rol)){
+        if(registrarUsuario($conexionBBDD, $email, $nickname, $password, $rol)){
             echo json_encode(["success"=>1]);
         }
         else {echo json_encode(["success"=>0]);}
@@ -40,7 +39,7 @@
         $password = ""; // Inicializo la variable referente a la PWD
         $pwdCambiada ? $password = md5($data->txtPassword) : $password = $data->txtPassword; // Compruebo la flag y establezco la PWD
 
-        if(actualizarUsuario($conexionBBDD, $id, $email, $nickname, $password, "a", $rol)){
+        if(actualizarUsuario($conexionBBDD, $id, $email, $nickname, $password, $rol)){
             echo json_encode(["success"=>1]);
         }
         else {echo json_encode(["success"=>0]);}

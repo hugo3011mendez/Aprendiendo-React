@@ -35,6 +35,7 @@ const Formulario = () => {
       const datosEnviar = {"txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol)};
       const cuerpo = JSON.stringify(datosEnviar);
       // Me comunico con la API
+      // FIXME => SyntaxError: Unexpected token '<', "<script>co"... is not valid JSON
       fetch(API+"?registrarUsuario=1", {method:"POST", body:cuerpo})
       .then(res => res.json()) // Realizo la petición
       .catch(e => {
