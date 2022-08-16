@@ -46,7 +46,7 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
         <tbody>
           { // Listo todos los usuarios que haya para que se muestren
             data.map(item => 
-              <tr> {/* Uso los nombres de los campos en la BBDD MySQL */}
+              <tr key={item.id}> {/* Uso los nombres de los campos en la BBDD MySQL */}
                 <th scope="row">{item.id}</th>
                 <td>{item.email}</td>
                 <td>{item.nickname}</td>

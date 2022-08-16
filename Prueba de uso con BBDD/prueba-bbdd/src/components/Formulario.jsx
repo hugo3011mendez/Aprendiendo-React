@@ -29,7 +29,6 @@ const Formulario = () => {
     if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim() || rol == null) {
       setIntroducido(false); // Pongo el introducido a false para que no se muestre la alerta
       setError(true); // Cambio el error a true ya que hay espacios vacíos
-      console.log("ERROR : Hay datos vacíos");
     }
     else{     
       // Defino el cuerpo del mensaje que le mandaré a la API con los datos introducidos

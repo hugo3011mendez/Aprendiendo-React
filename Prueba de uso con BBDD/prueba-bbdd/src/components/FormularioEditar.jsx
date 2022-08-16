@@ -27,18 +27,16 @@ const FormularioEditar = ({usuario}) => {
     
     if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim() || rol == null) {
       setError(true); // Cambio el error a true ya que hay espacios vacíos
-      console.log("ERROR : Hay datos vacíos");
     }
     else{     
       // Defino el cuerpo del mensaje que le mandaré a la API con los datos editados
       // Añado el campo ID para la misma y el campo flag para saber si la contraseña ha sido editada
       const datosEnviar = {"id":parseInt(usuario.id), "txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol), "flag":txtPassword===usuario.pwd?false:true};
       const cuerpo = JSON.stringify(datosEnviar);
-      console.log(cuerpo);
-      // FIXME : No cambia el rol
+      // FIXME : SyntaxError => Unexpected token '<', "<script>co"... is not valid JSON
       // Me comunico con la API
       fetch(API+"?actualizarUsuario=1", {method:"POST", body:cuerpo})
-      .then(res => console.log(res.json())) // Realizo la petición
+      .then(res => res.json()) // Realizo la petición
       .catch(e => {
         if (e) { // Si algo falla, muestro el mensaje de error
           console.log(e);
