@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useFetch } from '../hooks/useFetch';
 import Loading from './Loading';
 import API from '../services/API'; // Importo la constante referente a la API
+import axios from "axios"; // Importo Axios
+
 
 const ListaUsuarios = () => { // Referente a listar los usuarios
 
@@ -13,7 +15,7 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
   }
   
   if (error !== "") { // Compruebo que haya algún error para mostrarlo
-    return <h2>{error}</h2>
+    return <div className="alert alert-danger" role="alert">{error}</div>
   }
 
   /**
@@ -21,17 +23,10 @@ const ListaUsuarios = () => { // Referente a listar los usuarios
    * @param {*} id La ID del usuario
    */
   function eliminarUsuario(id){
-    const url = API+"?eliminarUsuario="+id; // Armo la URL
-    // Me comunico con la API
-    fetch(url)
-    .then(res => res.json()) // Realizo la petición
-    // .then(res => console.log(res.json())) // Realizo la petición
-    .then((datosRespuesta) => {
-      console.log(datosRespuesta); // Muestro los datos obtenidos en respuesta del server
-      window.location.reload(); // Recargo la página para que se muestren los datos actualizados
-    })
-    .catch(e => console.log(e)); // Si algo falla, muestro el mensaje de error
+    axios.post(API+"?eliminarUsuario="+id);
+    window.location.reload(); // Recargo la página para que se muestren los datos actualizados
   }
+
 
   return (
     <table className='table'>

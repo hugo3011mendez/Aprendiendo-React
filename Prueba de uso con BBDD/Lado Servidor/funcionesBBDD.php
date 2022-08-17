@@ -30,18 +30,17 @@
      * 
      * @param $conexion La conexión con la base de datos. Pasada por referencia para que los cambios hagan efecto en la conexión.
      * @param $sentencia La sentencia a ejecutar
-     * @param $mensaje El mensaje a mostrar en consola si algo sale mal
      * 
      * @return Boolean Indicando el resultado de la función
      */
-    function comprobarResultadoDeQuery(&$conexion, $sentencia, $mensaje){
+    function comprobarResultadoDeQuery(&$conexion, $sentencia){
         if (mysqli_query($conexion, $sentencia)) { // Intento eliminar las subtareas activas
             $conexion->commit(); // Realizo el commit si ha salido bien
 
             return true;
         }
         else {
-            return accionesDeError($conexion, $mensaje); // Devuelvo el resultado de las acciones de error
+            return accionesDeError($conexion); // Devuelvo el resultado de las acciones de error
         }
     }
 
@@ -50,14 +49,11 @@
      * Acciones a realizar cuando ocurre algún error en una consulta contra la base de datos
      * 
      * @param $conexion La conexión con la base de datos. Pasada por referencia para que los cambios hagan efecto en la conexión.
-     * @param $mensaje El mensaje de error que se quiere escribir en la consola
      * 
      * @return Boolean indicando que la operación tuvo errores, siempre es false
      */
-    function accionesDeError(&$conexion, $mensaje){
+    function accionesDeError(&$conexion){
         $conexion->rollback(); // Al salir algo mal, primero hago el rollback
-
-        consoleLog($mensaje); // Y en ese caso muestro un mensaje de error en la consola
         $conexion-> close(); // Finalmente cierro la conexión a la base de datos
         
         return false; // Devuelvo un false indicando que ha habido algún error
@@ -95,9 +91,9 @@
 
         if (!$yaRegistrado) { // Si finalmente el email no está en la tabla de la BBDD
             // Armo la sentencia
-            $sentencia = "INSERT INTO ".TABLA_USUARIOS." (email, nickname, pwd, imagen, rol) VALUES('".$email."', '".$nickname."', '".md5($password)."', ".$rol.")";
+            $sentencia = "INSERT INTO ".TABLA_USUARIOS." (email, nickname, pwd, rol) VALUES('".$email."', '".$nickname."', '".md5($password)."', ".$rol.")";
             // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-            return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al registrar al usuario. ".$conexion-> connect_error);       
+            return comprobarResultadoDeQuery($conexion, $sentencia);       
         }
         else {
             accionesDeError($conexion, "Error al registrarse : El email del usuario ya se encuentra en la base de datos");
@@ -120,12 +116,13 @@
      */
     function actualizarUsuario($conexion, $id, $email, $nickname, $password, $rol){
         // Armo la sentencia
-        $sentencia = "UPDATE ".TABLA_USUARIOS." SET email = '".$email."', nickname = '".$nickname."', pwd = '".$password.", rol =".$rol." WHERE id = ".$id;
+        $sentencia = "UPDATE ".TABLA_USUARIOS." SET email = '".$email."', nickname = '".$nickname."', pwd = '".$password."', rol =".$rol." WHERE id = ".$id;
         
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al actualizar el usuario. ".$conexion-> connect_error);       
+        return comprobarResultadoDeQuery($conexion, $sentencia);       
     }
 
+    
     /**
      * Elimina el usuario cuya ID coincida con la pasada como parámetro
      * 
@@ -138,7 +135,7 @@
         // Primero tengo que eliminar los proyectos del usuario, debido a que su ID es clave foránea en la tabla de proyectos
         if (eliminarProyectosDeUsuario($conexion, $id)) {
             $sentencia = "DELETE FROM ".TABLA_USUARIOS." WHERE id = ".$id.";"; // Armo la sentencia
-            return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al eliminar al usuario con ID ".$id.". ".$conexion-> connect_error);
+            return comprobarResultadoDeQuery($conexion, $sentencia);
         }
     }
 
@@ -158,7 +155,7 @@
         while ($proyecto = $resultado -> fetch_object()) { // Recorro todos los proyectos en su tabla correspondiente
             // Ejecuto la función que elimina un proyecto y todas sus tareas de la base de datos
             if (!eliminarProyecto($conexion, $proyecto, true)) {
-                return accionesDeError($conexion, "Uno de los proyectos no se ha podido eliminar");
+                return accionesDeError($conexion);
             }
         }
 
@@ -203,7 +200,7 @@
         $sentencia = "INSERT INTO ".TABLA_ROLES." (nombre, privilegios) VALUES('".$nombre."', ".$privilegios.")";
 
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al crear el rol ".$nombre.". ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
 
 
@@ -232,7 +229,7 @@
         // Armo la sentencia
         $sentencia = "UPDATE ".TABLA_ROLES." SET nombre = '".$nombre."', privilegios = ".$privilegios." WHERE id = ".$id;
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar actualizar el rol con ID ".$id.". ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
 
 
@@ -279,7 +276,7 @@
         $sentencia = "DELETE FROM ".TABLA_ROLES." WHERE id = ".$id;
         
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar el rol con ID ".$id.". ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
 
 
@@ -307,7 +304,7 @@
         "', NOW());";
         
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar crear el proyecto ".$nombre.". ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
     
 
@@ -336,7 +333,7 @@
         $sentencia = "UPDATE ".TABLA_PROYECTOS." SET nombre = '".$nombre."', descripcion = '".$descripcion."' WHERE id = ".$id;
 
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar actualizar el proyecto con ID ".$id.". ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
 
 
@@ -390,12 +387,12 @@
                 }
                 else {
                     // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-                    return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar el proyecto ".$proyecto-> nombre.". ".$conexion-> connect_error);                    
+                    return comprobarResultadoDeQuery($conexion, $sentencia);                    
                 }
             }
             else {
                 // Devuelvo el resultado de las acciones de error
-                return accionesDeError($conexion, "Se ha producido un error al intentar eliminar todas las tareas del proyecto ".$proyecto-> nombre.". ".$conexion-> connect_error);
+                return accionesDeError($conexion);
             }
         }
         elseif (is_int($proyecto)) { // Si resulta que la variable se trata de la ID del proyecto
@@ -403,11 +400,11 @@
                 // Si sale bien, armo la consulta para eliminar el proyecto
                 $sentencia = "DELETE FROM ".TABLA_PROYECTOS." WHERE id =".$proyecto;
                 // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-                return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar el proyecto. ".$conexion-> connect_error);
+                return comprobarResultadoDeQuery($conexion, $sentencia);
             }
             else {
                 // Devuelvo el resultado de las acciones de error
-                return accionesDeError($conexion, "Se ha producido un error al intentar eliminar todas las tareas del proyecto. ".$conexion-> connect_error);
+                return accionesDeError($conexion);
             }
         }
     }    
@@ -432,7 +429,7 @@
         }
 
         // Devuelvo el resultado de ejecutar la consulta previamente armada
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Ha ocurrido un error a la hora de eliminar todas las tareas del proyecto. ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
     
     
@@ -477,10 +474,10 @@
             ", ".$estado.");";
             
             // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-            return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar crear la tarea ".$nombre.". ".$conexion-> connect_errno);
+            return comprobarResultadoDeQuery($conexion, $sentencia);
         }
         else { // Si el proyecto no existe, realizo las acciones de error
-            accionesDeError($conexion, "El proyecto en el que se quiere insertar la tarea no existe ");
+            accionesDeError($conexion);
         }
     }
     
@@ -519,7 +516,7 @@
         // Armo la sentencia
         $sentencia = "UPDATE ".TABLA_TAREAS." SET nombre = '".$nombre."', descripcion = '".$descripcion."', fecha_modificacion = NOW(), parentID = ".$parentID.", estado = ".$estado." WHERE id = ".$id;
         // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar actualizar la tarea con ID ".$id.". ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
     
 
@@ -582,11 +579,11 @@
                 $sentencia = "DELETE FROM ".TABLA_TAREAS." WHERE id=".$tarea-> id;
                 
                 // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-                return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar la tarea ".$tarea-> nombre.". ".$conexion-> connect_error);
+                return comprobarResultadoDeQuery($conexion, $sentencia);
             }
             else {
                 // Devuelvo el resultado de las acciones de error
-                return accionesDeError($conexion, "Se ha producido un error al intentar eliminar las subtareas de la tarea ".$tarea-> nombre.". ".$conexion-> connect_error);
+                return accionesDeError($conexion);
             }
         }
         elseif (is_int($tarea)) { // Si la variable es el ID de la tarea
@@ -596,11 +593,11 @@
                 $sentencia = "DELETE FROM ".TABLA_TAREAS." WHERE id=".$tarea;
                 
                 // Compruebo el resultado de la ejecución de la sentencia y devuelvo un booleano según corresponda
-                return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar la tarea. ".$conexion-> connect_error);
+                return comprobarResultadoDeQuery($conexion, $sentencia);
             }
             else {
                 // Devuelvo el resultado de las acciones de error
-                return accionesDeError($conexion, "Se ha producido un error al intentar eliminar las subtareas de la tarea. ".$conexion-> connect_error);
+                return accionesDeError($conexion);
             }            
         }
     }
@@ -619,12 +616,12 @@
         if (is_object($tarea)) { // Si la variable es un objeto de tipo tarea
             // Intento eliminar las subtareas
             $sentencia = "DELETE FROM ".TABLA_TAREAS." WHERE parentID=".$tarea-> id.";"; // Armo la sentencia para conseguir todas las subtareas
-            return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar las subtareas de la tarea ".$tarea-> nombre.". ".$conexion-> connect_error);
+            return comprobarResultadoDeQuery($conexion, $sentencia);
         }
         elseif (is_int($tarea)) { // Si la variable es el ID de la tarea
             // Intento eliminar las subtareas
             $sentencia = "DELETE FROM ".TABLA_TAREAS." WHERE parentID=".$tarea.";";
-            return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar eliminar las subtareas de la tarea. ".$conexion-> connect_error);
+            return comprobarResultadoDeQuery($conexion, $sentencia);
         }
     }
 
@@ -644,11 +641,11 @@
             // Armo la sentencia para actualizar el estado de la tarea que quiero finalizar
             $sentencia = "UPDATE ".TABLA_TAREAS." SET fecha_modificacion= NOW(), estado =".ESTADO_FINALIZADO." WHERE id=".$idTarea.";";
             // Devuelvo un booleano según el resultado de la ejecución de la query
-            return comprobarResultadoDeQuery($conexion, $sentencia, "Se ha producido un error al intentar finalizar la tarea con ID ".$idTarea.". ".$conexion-> connect_error);
+            return comprobarResultadoDeQuery($conexion, $sentencia);
         }
         else{
             // Devuelvo el resultado de las acciones de error
-            return accionesDeError($conexion, "Se ha producido un error al intentar finalizar las subtareas de la tarea. ".$conexion-> connect_error);
+            return accionesDeError($conexion);
         }
     }
 
@@ -666,7 +663,7 @@
 
         // Armo la sentencia para actualizar las subtareas y finalizarlas
         $sentencia = "UPDATE ".TABLA_TAREAS." SET fecha_modificacion = NOW(), estado=".ESTADO_FINALIZADO." WHERE parentID=".$idTareaPadre.";";
-        return comprobarResultadoDeQuery($conexion, $sentencia, "Ha ocurrido un error al finalizar las subtareas de la tarea con ID ".$idTareaPadre.". ".$conexion-> connect_error);
+        return comprobarResultadoDeQuery($conexion, $sentencia);
     }
 
 
@@ -695,16 +692,16 @@
             if (mysqli_query($conexion, $sentencia)) { // Ejecuto la sentencia y compruebo si ha salido bien
                 $sentencia = "UPDATE ".TABLA_TAREAS." SET fecha_modificacion = NOW(), estado=".ESTADO_PENDIENTE." WHERE id=".$id.";"; // Armo la sentencia para poner la tarea en pendiente
                 // Finalmente compruebo el resultado de la query y lo devuelvo
-                return comprobarResultadoDeQuery($conexion, $sentencia, "Ha ocurrido un error al poner en pendiente la subtarea con ID ".$id.". ".$conexion-> connect_error);
+                return comprobarResultadoDeQuery($conexion, $sentencia);
             }
             else {
-                return accionesDeError($conexion, "Ha ocurrido un error poniendo en pendiente la tarea padre de la subtarea que se quiere poner en pendiente. ".$conexion-> connect_error);
+                return accionesDeError($conexion);
             }
         }
         else { // Si no tiene tarea padre
             $sentencia = "UPDATE ".TABLA_TAREAS." SET fecha_modificacion = NOW(), estado=".ESTADO_PENDIENTE." WHERE id=".$id.";"; // Armo la sentencia para poner la tarea en pendiente 
             // Compruebo el resultado de la query y lo devuelvo
-            return comprobarResultadoDeQuery($conexion, $sentencia, "Ha ocurrido un error al poner en pendiente la subtarea con ID ".$id.". ".$conexion-> connect_error);
+            return comprobarResultadoDeQuery($conexion, $sentencia);
         }
     }
 ?>

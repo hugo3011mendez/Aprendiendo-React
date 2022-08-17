@@ -226,6 +226,7 @@
         - Primero creo un componente referente a la ruta protegida
         - Después creo otro componente con una verificación, como por ejemplo, una verificación de usuario
         - Añado la verificación al index, y dentro de su etiqueta meto la ruta protegida
+    - Para navegar de una ruta a otra, simplemente tenemos que hacer `import { useNavigate } from "react-router-dom";` y donde queramos escribir `navigate("direccion");`
 
 - NavLink :
     - Es una manera de poner enlaces activos
@@ -271,7 +272,7 @@
     - CRUD :
         - Create :
             - Primero se debe hacer un formulario desde el que se escribirán los datos del nuevo elemento
-            - Recojo los datos del form como si fuera un objeto : `const datos = {"txt1":txt1, "txt2":txt2};`
+            - Recojo los datos del form de la misma manera que un objeto : `const datos = {"txt1":txt1, "txt2":txt2};`
             - Creo un objeto JSON con los valores introducidos del form : `const cuerpo = JSON.stringify(datos)`
             - Consumo los datos PHP como si se tratara de una API usando `fetch()`
                 - Esta vez, en la dirección del navegador uso `https://localhost/carpeta/?create=1` para que sepa qué código devolver
@@ -288,4 +289,13 @@
                     - Esta vez, en la dirección del navegador uso `https://localhost/carpeta/?delete=ID` para especificar la ID del dato a borrar
                     - Puedo recargar la página usando `.then((datosRespuesta) => {window.location.reload();}`
                     - Después sigue como un `fetch()` normal
-        
+
+- Axios :
+    - Es un paquete que se instala usando el comando `npm install axios`
+    - En React :
+        - Para importarlo en el archivo que se requiera, se usará `import axios from "axios";`
+        - Para obtener datos de la API se usará `axios.get(URL)` de la misma manera que un `fetch()`
+        - Para mandar datos a la API se usará `axios.post(URL, cuerpoDeLaPeticion)` de la misma manera que un `fetch()`
+    - En PHP :
+        - Para todas las operaciones CRUD menos *READ*, se establecerá una variable `$method = $_SERVER["REQUEST_METHOD"];`
+        - Se controlará en un `switch($method){case 'POST': code}` en el que dentro del case se escribirá el código PHP

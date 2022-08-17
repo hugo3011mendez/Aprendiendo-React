@@ -1,5 +1,7 @@
 import { useState } from "react"; // Importamos el hook de React
 import { useFormulario } from "../hooks/useFormulario"; // Importamos el hook personalizado
+import { useNavigate } from "react-router-dom"; // Importaciones de Router v6
+import axios from "axios"; // Importo Axios
 import API from '../services/API'; // Importo la constante referente a la API
 
 const Formulario = () => {
@@ -9,15 +11,17 @@ const Formulario = () => {
     txtEmail: "",
     txtNickname: "",
     txtPassword: "",
-    rol: null
+    rol: 1
   };
 
   const [error, setError] = useState(false); // Un hook referente al error, por defecto a false
+  const [message, setMessage] = useState(""); // Un hook referente al mensaje de error o de acción correcta, por defecto una cadena vacía
   const [introducido, setIntroducido] = useState(false); // Un hook referente a si se acaba de introducir un usuario, por defecto a false
   
   const [inputs, handleChange, reset] = useFormulario(initialState); // Uso el hook personalizado en Utils
   const {txtEmail, txtNickname, txtPassword, rol} = inputs; // Destructuración de los valores de los inputs
 
+  const navigate = useNavigate(); // Establezco el hook referente a cambiar de dirección web
 
   /**
     * Función para controlar el evento onSubmit
@@ -29,26 +33,27 @@ const Formulario = () => {
     if (!txtEmail.trim() || !txtNickname.trim() || !txtPassword.trim() || rol == null) {
       setIntroducido(false); // Pongo el introducido a false para que no se muestre la alerta
       setError(true); // Cambio el error a true ya que hay espacios vacíos
+      setMessage("Todos los campos son obligatorios"); // Establezco el valor del mensaje de error
     }
     else{     
       // Defino el cuerpo del mensaje que le mandaré a la API con los datos introducidos
       const datosEnviar = {"txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol)};
       const cuerpo = JSON.stringify(datosEnviar);
-      // Me comunico con la API
-      // FIXME => SyntaxError: Unexpected token '<', "<script>co"... is not valid JSON
-      fetch(API+"?registrarUsuario=1", {method:"POST", body:cuerpo})
-      .then(res => res.json()) // Realizo la petición
-      .catch(e => {
-        if (e) { // Si algo falla, muestro el mensaje de error
-          console.log(e);
-          setError(true);
+      // Realizo la petición a la API
+      axios.post(API+"?registrarUsuario=1", cuerpo).then(function(response){
+        if (response.data.success === 1) { // Compruebo si el resultado del success es correcto
+          setMessage(response.data.message);
+          setError(false); // Quito la alerta en el caso de error
+          setIntroducido(true); // Muestro la alerta en el caso correcto
+          // navigate("/"); // TODO : Volver a la página de Inicio?
         }
-        else{ // Si no hay error, recargo la página para que se muestren los datos actualizados
-          window.location.reload();
+        else{ // Y en el caso de que haya algún error
+          setMessage(response.data.message); // Establezco el valor del mensaje de error
+          setIntroducido(false); // Quito la alerta en el caso correcto
+          setError(true); // Y muestro la alerta en el caso de error
         }
-      }) // Si algo falla, muestro el mensaje de error
+      });
 
-      setIntroducido(true); // Pongo la booleana a true        
 
       reset(); // Al final de todo reinicio los campos
     }
@@ -56,12 +61,12 @@ const Formulario = () => {
 
   // Creo un nuevo componente pequeño, referente a mostrar el error
   const PintarError = () => (
-    <div className="alert alert-danger" role="alert">txts los campos son obligatorios</div>
+    <div className="alert alert-danger" role="alert">{message}</div>
   );
 
   // Creo un nuevo componente pequeño, referente a mostrar el mensaje de éxito
   const PintarINSERT = () => (
-    <div className="alert alert-success" role="alert">Se ha introducido el nuevo usuario con éxito</div>
+    <div className="alert alert-success" role="alert">{message}</div>
   );
 
 
@@ -103,7 +108,7 @@ const Formulario = () => {
 
         {/* Radio Buttons referentes al rol del usuario : */}
         <div className="form-check">
-          <input className="form-check-input" type="radio" name="rol" id="rol1" value={1} onChange={handleChange} />
+          <input className="form-check-input" type="radio" name="rol" id="rol1" value={1} onChange={handleChange} checked />
           <label className="form-check-label" htmlFor="rol1">
             Usuario
           </label>

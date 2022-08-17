@@ -1,6 +1,8 @@
 import { useState } from "react"; // Importamos el hook de React
 import { useFormulario } from "../hooks/useFormulario"; // Importamos el hook personalizado
 import API from '../services/API'; // Importo la constante referente a la API
+import axios from "axios"; // Importo Axios
+
 
 const FormularioEditar = ({usuario}) => {
 
@@ -33,19 +35,8 @@ const FormularioEditar = ({usuario}) => {
       // Añado el campo ID para la misma y el campo flag para saber si la contraseña ha sido editada
       const datosEnviar = {"id":parseInt(usuario.id), "txtEmail":txtEmail, "txtNickname":txtNickname, "txtPassword":txtPassword, "rol":parseInt(rol), "flag":txtPassword===usuario.pwd?false:true};
       const cuerpo = JSON.stringify(datosEnviar);
-      // FIXME : SyntaxError => Unexpected token '<', "<script>co"... is not valid JSON
-      // Me comunico con la API
-      fetch(API+"?actualizarUsuario=1", {method:"POST", body:cuerpo})
-      .then(res => res.json()) // Realizo la petición
-      .catch(e => {
-        if (e) { // Si algo falla, muestro el mensaje de error
-          console.log(e);
-          setError(true);          
-        }
-        else{ // Si no hay error, recargo la página para que se muestren los datos actualizados
-          window.location.reload(); // TODO : Redirigir a inicio
-        }
-      })
+      // Realizo la petición a la API
+      axios.post(API+"?actualizarUsuario=1", cuerpo);
     }
   };
 

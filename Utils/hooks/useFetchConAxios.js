@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"; // Importo los hooks necesarios
-import axios from "axios"; // Importo Axios
+import axios from "axios"; // IMPORTANTE : HAY QUE TENER EL PAQUETE AXIOS INSTALADO
 
 
 export const useFetch = (url) => { // Este hook recibe la URL a la que realizamos la petición
