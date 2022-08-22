@@ -6,8 +6,7 @@ const Inicio = () => {
   // Consigo las variables del contexto
   const {user, signIn, signOut} = useContext(UserContext);
 
-
-
+  
   return (
     <div>
       <h1>Inicio</h1>
