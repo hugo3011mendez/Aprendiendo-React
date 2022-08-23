@@ -12,7 +12,8 @@ export const useFetch = (url) => { // Este hook recibe la URL a la que realizamo
 
         axios.get(url).then(function(response){ // Realizo la petición
           setData(response.data); // Consigo los datos
-        }).finally(() => setLoading(false)); // Finalmente después de todo eso, dejo de cargar
+        }).catch(error => {setError(error);})
+        .finally(() => setLoading(false)); // Finalmente después de todo eso, dejo de cargar
     }, [url]);
 
   return {data, error, loading} // Devuelvo los datos de los hooks

@@ -67,6 +67,12 @@
 - Carpeta src
     - En index.js se concentrarán todos los componentes React de la página
     - App.js es un componente de React en este caso
+    - La estructura será de la siguiente manera :
+        - Carpeta *components* para los componentes personalizados
+        - Carpeta *hooks* para los hooks personalizados
+        - Carpeta *routes* para las rutas si se usa React Router DOM
+        - Carpeta *context* para los archivos de los contextos si se usa `useContext`
+        - Carpeta *services* para archivos de constantes
 
 
 ## JSX (JavaScript XML)
