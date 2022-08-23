@@ -5,7 +5,7 @@
 - [Clase 4 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-04-react-api/)
 - [Clase 5 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-05-react-router/)
 - [Clase 6 del curso de React](https://bluuweb.github.io/desarrollo-web-bluuweb/18-06-react-context/)
-- [Vídeo para aprender React con PHP y MySQL](https://www.youtube.com/watch?v=_DJBFUIT2Kg) **Actualmente aquí**
+- [Vídeos para aprender a usar React con PHP y MySQL con el paquete Axios](https://www.youtube.com/playlist?list=PLCakfctNSHkFDTFczqhXNv-nYMHvLMT1H)
 
 ## Requisitos
 - [Extensión de VS Code para React](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
